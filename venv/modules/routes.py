@@ -23,13 +23,16 @@ def login_form():
       session['logged_in_at'] = datetime.now()
       session['current_user'] = current_user
       session['success'] = success
+      session['msg_err'] = msg_err
       return redirect('/welcome') 
    else:
       session.pop('logged_in', None)
-      return render_template('login_form.html', form=form, msg_err=msg_err)
+      session['msg_err'] = msg_err
+      return render_template('login_form.html', form=form)
   else:
     session.pop('logged_in', None)
-    return render_template('login_form.html', form=form, msg_err=msg_err)
+    session['msg_err'] = msg_err
+    return render_template('login_form.html', form=form)
 
 def welcome():
   not_login = not_logged_in()
