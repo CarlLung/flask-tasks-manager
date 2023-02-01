@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+  </head>
+
+  <body>
+    <div
+      class="min-h-screen bg-slate-200 py-6 flex flex-col justify-center sm:py-12"
+    >
+      <div class="relative px-6 py-3 mx-auto w-full sm:w-96 text-center">
+        <style scoped>
+          input:focus {
+            border-width: 2px;
+          }
+        </style>
+        <span class="text-2xl text-gray-600 font-semibold"
+          >Tasks Manager(Flask)</span
+        ><br />
+        <span class="text-1xl text-gray-600 font-semibold"
+          >Login to your account</span
+        >
+        {% if message: %}
+        <p>{{message}}</p>
+        {% endif %} {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">{{ message }}</div>
+        {% endfor %}
+        <div
+          class="mt-4 bg-slate-100 shadow-md rounded-lg text-left text-gray-600"
+        >
+          <div class="h-2 bg-indigo-700 rounded-t-md"></div>
+          <div class="border px-8 py-6">
+            <form method="POST" action="">
+              {{ form.hidden_tag() }} {{ form.username.label(class="label block
+              font-semibold")}} {{ form.username(class="w-full h-5 mt-2 px-3
+              py-5 border rounded-md focus:outline-none focus:ring-1
+              focus:ring-indigo-400", placeholder="Username") }} {{
+              form.password.label(class="label mt-3 block font-semibold") }} {{
+              form.password( class="w-full h-5 mt-2 px-3 py-5 border rounded-md
+              focus:outline-none focus:ring-1 focus:ring-indigo-400",
+              placeholder="************") }} {{ form.confirm.label(class="label
+              mt-3 block font-semibold") }} {{ form.confirm( class="w-full h-5
+              mt-2 px-3 py-5 border rounded-md focus:outline-none focus:ring-1
+              focus:ring-indigo-400", placeholder="************") }}
+
+              <div class="flex items-center mt-4">
+                {{ form.submit(class="mx-auto px-4 py-2 bg-indigo-700 text-white
+                rounded-md") }}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
