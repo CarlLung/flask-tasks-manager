@@ -1,4 +1,5 @@
 from modules.forms.login_form import LoginForm
+from modules.forms.command_form import CmdForm
 from modules.forms.add_form import AddForm
 from modules.forms.register_form import RegisterForm
 from modules.functions import *
@@ -28,8 +29,6 @@ def login_form():
     session.pop('logged_in', None)
     return render_template('login_form.html', form=form, message=message)
 
-
-
 def welcome():
   not_login = not_logged_in()
   if not_login:
@@ -43,8 +42,26 @@ def welcome():
   
   current_user = session.get('current_user')
 
+  form = CmdForm()
+  if form.validate_on_submit():
+   command = form.command.data
+   if command.lower() == 'r':
+      return redirect('/register')
+   elif command.lower() == 'a':
+      return redirect('/add_task')
+   elif command.lower() == 'va':
+      return redirect('/all_tasks')
+   elif command.lower() == 'vm':
+      return redirect('/my_tasks')
+   elif command.lower() == 'r':
+      return redirect('/logout')
+   else:
+     message = "Invalid input. Please enter your command according to the options menu."
+     session['message'] = message
+     return redirect('/welcome')
+
   if not not_login:
-   return render_template('welcome.html', current_user=current_user)
+   return render_template('welcome.html', form=form, current_user=current_user)
 
 def add_task_render():
   not_login = not_logged_in()
@@ -70,11 +87,13 @@ def add_task_render():
     add_task(responsible, title, description, due)
    except:
     message = 'An error occured.'
-    return render_template('add_form.html', form=form, message=message, current_user=current_user)
+    session['message'] = message
+    return redirect('/add_task')
    else:
     message = 'Add Task Successful.'
-    return render_template('add_form.html', form=form, message=message, current_user=current_user)
-  return render_template('add_form.html', form=form, message=message, current_user=current_user)
+    session['message'] = message
+    return redirect('/add_task')
+  return render_template('add_form.html', form=form, current_user=current_user)
 
 def all_tasks_render():
   not_login = not_logged_in()
@@ -93,6 +112,7 @@ def all_tasks_render():
   return render_template('all_tasks.html', tasks_list=tasks_list, current_user=current_user)
 
 def my_tasks_render():
+  
   not_login = not_logged_in()
   if not_login == True:
     flash("Content only available for logged in users.")
@@ -137,18 +157,36 @@ def register_form():
     valid_entries, message = register(username, password, confirm)
    except:
     message = 'An error occured.'
-    return render_template('register_form.html', form=form, message=message, current_user=current_user)
+    return redirect('/register')
    else:
      if valid_entries:
       with open ('static/user.txt', 'a') as f_user:
        f_user.write(f"{username}, {password}\n")
-      return render_template('register_form.html', form=form, message=message, current_user=current_user)
-  return render_template('register_form.html', form=form, message=message, current_user=current_user)
+       session['message'] = message
+      return redirect('/register')
+     else:
+       session['message'] = message
+       return redirect('/register')
+  return render_template('register_form.html', form=form, current_user=current_user)
 
-def statistics():
-  return render_template('statistics.html')
+def statistics_render():
+  not_login = not_logged_in()
+  if not_login == True:
+    flash("Content only available for logged in users.")
+    return redirect('/home')
+  
+  expired = expired_session()
+  if expired:
+    flash("Login session timed out. Please login again.")
+    return redirect('/home')
+  
+  current_user = session.get('current_user')
+
+  number_users, number_tasks = statistics()
+  return render_template('statistics.html', number_users=number_users, number_tasks=number_tasks, current_user=current_user )
 
 def unauthorised():
+
   not_login = not_logged_in()
   if not_login == True:
     flash("Content only available for logged in users.")
@@ -164,9 +202,9 @@ def unauthorised():
   return render_template('unauthorised.html', current_user=current_user)
 
 def logout():
-  #session.pop('logged_in', None)
   session.clear()
-  return render_template('logout.html')
+  message = 'You have logged out the sysyem. See you next time.'
+  return render_template('login_form.html', message=message, form=form)
 
 
 

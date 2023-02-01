@@ -13,44 +13,59 @@
     <div
       class="min-h-screen bg-slate-200 py-6 flex flex-col justify-center sm:py-12"
     >
-      <div class="relative px-6 py-3 mx-auto w-full sm:w-96 text-center">
+      <div
+        class="relative px-6 py-3 mx-auto w-full text-center"
+        style="width: 40%"
+      >
         <style scoped>
           input:focus {
             border-width: 2px;
           }
         </style>
-        <span class="text-2xl text-gray-600 font-semibold"
-          >Tasks Manager(Flask)</span
-        ><br />
-        <span class="text-1xl text-gray-600 font-semibold"
-          >Login to your account</span
-        >
-        {% if message: %}
-        <p>{{message}}</p>
-        {% endif %} {% for message in get_flashed_messages() %}
-        <div class="alert alert-warning">{{ message }}</div>
-        {% endfor %}
+        <div class="flex flex-col">
+          <span class="text-4xl mt-8 font-bold text-indigo-900 mb-3"
+            >Tasks Manager(Flask)</span
+          >
+          <span class="text-xl shrink text-indigo-700 font-medium mr-2"
+            >Login to your account</span
+          >
+        </div>
+
         <div
           class="mt-4 bg-slate-100 shadow-md rounded-lg text-left text-gray-600"
         >
-          <div class="h-2 bg-indigo-700 rounded-t-md"></div>
-          <div class="border px-8 py-6">
+          <div class="h-2 bg-indigo-700 rounded-t-md flex flex-col"></div>
+          {% if not message and not get_flashed_messages(): %}
+          <div class="h-7 self-start"></div>
+          {% endif %} {% if message: %}
+          <p class="bg-red-500 h-7 text-white self-start text-center">
+            {{message}}
+          </p>
+          {% endif %} {% for message in get_flashed_messages() %}
+          <div class="bg-red-500 h-7 text-white self-start text-center">
+            {{ message }}
+          </div>
+          {% endfor %}
+
+          <div class="px-8 pb-8 pt-3">
             <form method="POST" action="">
               {{ form.hidden_tag() }} {{ form.username.label(class="label block
-              font-semibold")}} {{ form.username(class="w-full h-5 mt-2 px-3
+              font-semibold text-indigo-700")}} {{ form.username(class="w-full
+              h-5 mt-2 px-3 py-5 border rounded-md focus:outline-none
+              focus:ring-1 focus:ring-indigo-400", placeholder="Username") }} {{
+              form.password.label(class="label mt-3 block font-semibold
+              text-indigo-700") }} {{ form.password( class="w-full h-5 mt-2 px-3
               py-5 border rounded-md focus:outline-none focus:ring-1
-              focus:ring-indigo-400", placeholder="Username") }} {{
-              form.password.label(class="label mt-3 block font-semibold") }} {{
-              form.password( class="w-full h-5 mt-2 px-3 py-5 border rounded-md
-              focus:outline-none focus:ring-1 focus:ring-indigo-400",
-              placeholder="************") }} {{ form.confirm.label(class="label
-              mt-3 block font-semibold") }} {{ form.confirm( class="w-full h-5
-              mt-2 px-3 py-5 border rounded-md focus:outline-none focus:ring-1
+              focus:ring-indigo-400", placeholder="************") }} {{
+              form.confirm.label(class="label mt-3 block font-semibold
+              text-indigo-700") }} {{ form.confirm( class="w-full h-5 mt-2 mb-2
+              px-3 py-5 border rounded-md focus:outline-none focus:ring-1
               focus:ring-indigo-400", placeholder="************") }}
 
               <div class="flex items-center mt-4">
                 {{ form.submit(class="mx-auto px-4 py-2 bg-indigo-700 text-white
-                rounded-md") }}
+                rounded-md hover:bg-indigo-800 active:bg-indigo-900 w-60
+                uppercase tracking-wide") }}
               </div>
             </form>
           </div>

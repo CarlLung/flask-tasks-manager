@@ -3,6 +3,9 @@ from modules import routes
 from flask import Flask
 from datetime import timedelta
 
+
+
+
 app = Flask(  # Create a flask app
 	__name__,
 	template_folder='templates',  # Name of html file folder
@@ -11,15 +14,17 @@ app = Flask(  # Create a flask app
 
 ok_chars = string.ascii_letters + string.digits
 
+app.jinja_env.add_extension('jinja2.ext.do')
+
 app.route('/home', methods=['GET', 'POST'])(routes.login_form)
-app.route('/welcome')(routes.welcome)
-app.route('/logout')(routes.logout)
+app.route('/welcome', methods=['GET', 'POST'])(routes.welcome)
 app.route('/all_tasks')(routes.all_tasks_render)
 app.route('/add_task', methods=['GET', 'POST'])(routes.add_task_render)
 app.route('/my_tasks')(routes.my_tasks_render)
 app.route('/register', methods=['GET', 'POST'])(routes.register_form)
-app.route('/statistcs')(routes.statistics)
+app.route('/statistcs')(routes.statistics_render)
 app.route('/unauthorised')(routes.unauthorised)
+app.route('/logout')(routes.logout)
 
 
 app.config['SECRET_KEY'] = '123456'

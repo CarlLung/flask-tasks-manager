@@ -1,0 +1,26 @@
+{% extends "./components/layout.html" %} {% block content %}
+
+<p class="text-4xl mt-8 font-bold mb-3 text-indigo-900">Statistics</p>
+
+<div
+  class="px-8 py-6 shrink h-fit items-center content-center w-full mx-5 my-1 bg-indigo-50 rounded-xl shadow-md overflow-hidden max-w-3xl"
+  style="width: 85%"
+>
+  <div class="flex flex-col font-medium items-center">
+    <p class="text-xl shrink text-indigo-700 font-medium mr-2">
+      The current total number of tasks:
+    </p>
+    <p class="shrink text-3xl text-indigo-900 font-medium mr-2">
+      {{number_tasks}}
+    </p>
+    <br />
+    <p class="text-xl shrink text-indigo-700 font-medium mr-2">
+      The current total number of users:
+    </p>
+    <p class="shrink text-3xl text-indigo-900 font-medium mr-2">
+      {{number_users}}
+    </p>
+  </div>
+</div>
+
+{% endblock %}

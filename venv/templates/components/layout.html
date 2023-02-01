@@ -20,9 +20,17 @@
       <div
         class="flex flex-col bg-slate-100 grow items-center rounded-md"
         id="content"
-        style="position: relative"
       >
-        {% block content %}{% endblock %}
+        {% with message = session.get('message') %} {% if message %}
+        <div
+          class="bg-red-500 rounded-md h-7 w-full text-white self-start text-center"
+          style="position: relative"
+        >
+          {{ message }}
+        </div>
+        {% do session.update({'message': None}) %} {% else %}
+        <div class="h-7" style="position: relative"></div>
+        {% endif %} {% endwith %} {% block content %} {% endblock %}
       </div>
     </div>
   </body>

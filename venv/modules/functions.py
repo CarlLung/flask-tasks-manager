@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import session, flash, redirect
+from flask import session
 import pytz
 
 current_user = ''
@@ -91,9 +91,9 @@ def register(name, pw, pw2):
   return valid_entries, message
 
 def statistics():
-  get_users()
+  users_dict = get_users()
   number_users = len(users_dict)
-  get_tasks()
+  tasks_list = get_tasks()
   number_tasks = len(tasks_list)
-  print('')
+  return number_users, number_tasks 
 
