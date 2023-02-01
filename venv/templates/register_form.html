@@ -7,18 +7,18 @@
 <p>{{message}}</p>
 
 <div
-  class="px-8 py-6 shrink h-fit sm:h-300 md:h-550 items-center content-center w-full mx-5 my-1 bg-indigo-50 rounded-xl shadow-md overflow-auto max-w-3xl" style="width: 85%;"
+  class="px-8 py-6 shrink h-fit sm:h-300 md:h-550 items-center content-center w-full mx-5 my-1 bg-indigo-50 bg-opacity-60 rounded-xl shadow-md overflow-auto max-w-3xl" style="width: 85%;"
 >
   <form method="POST" action="">
     {{ form.hidden_tag() }} {{ form.username.label(class="label shrink text-xl
-    text-indigo-700 font-medium mr-2")}} {{ form.username(class="shrink
+    text-indigo-700 font-medium mr-2")}}<p class="text-xs text-gray-500">(</p>Name must be 8-20 characters long, contain only alphanumeric characters, dot or underscore)</p> {{ form.username(class="bg-opacity-40 shrink
     bg-neutral-50 w-full h-5 mt-1 mb-1 px-3 py-5 border rounded-md
     focus:outline-none focus:ring-1 focus:ring-indigo-400", placeholder="New User") }} {{ form.password.label(class="shrink label text-xl text-indigo-700
-    font-medium mr-2") }} {{ form.password( class="shrink bg-neutral-50 w-full
-    h-5 mt-1 mb-1 px-3 py-5 border rounded-md focus:outline-none focus:ring-1
+    font-medium mr-2") }} <p class="text-xs text-gray-500">(must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character)</p>{{ form.password( class="shrink bg-neutral-50 w-full
+    h-5 mt-1 mb-1 px-3 py-5 border bg-opacity-40 rounded-md focus:outline-none focus:ring-1
     focus:ring-indigo-400", placeholder="************") }} {{
     form.confirm.label(class="shrink label text-xl text-indigo-700 font-medium
-    mr-2") }} {{ form.confirm( class="shrink bg-neutral-50 w-full h-5 mt-1 px-3
+    mr-2") }} {{ form.confirm( class="shrink bg-opacity-40 bg-neutral-50 w-full h-5 mt-1 px-3
     py-5 border rounded-md focus:outline-none focus:ring-1
     focus:ring-indigo-400", placeholder="************") }}
 

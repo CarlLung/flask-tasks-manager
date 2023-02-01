@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import session
 import pytz
+import re
 
 current_user = ''
 users_dict = {}
@@ -33,9 +34,9 @@ def check_credentials(name, pw, pw2):
      else:
       if name in users_dict.keys():
         if pw == users_dict[name] and pw == pw2:
-          current_user = name
-          message = 'Login successful.'
-          isLoggedIn = True
+           current_user = name
+           message = 'Login successful.'
+           isLoggedIn = True
         else:    
           message = 'Incorrect credentials. Please enter again.'
           isLoggedIn = False
@@ -77,17 +78,32 @@ def get_tasks():
     tasks_list.append(task)
   return tasks_list
 
+def pw_valid(pw):
+  pw_pattern = re.compile(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#%?&+-^=])[A-Za-z\d@$!%+#-%^=*?&]{8,}$")
+  return re.match(pw_pattern, pw) is not None
+
+def name_valid(name):
+  name_pattern = re.compile(r"^[\w\d\._]{8,20}$")
+  return re.match(name_pattern, name) is not None
+
 def register(name, pw, pw2):
   users_dict = get_users()
   duplicate_name = any(key == name for key in users_dict)
   valid_entries = False
-  if pw != pw2:
-    message = 'Second password entry does not match first password entry.'
+  valid_name = name_valid(name) 
+  if not valid_name:
+    message = 'Name must be 8-20 characters long, contain only alphanumeric characters, dot or underscore'
   elif duplicate_name:
     message = 'Username is taken. Try another one.'
+  elif pw != pw2:
+    message = 'Second password entry does not match first password entry.'
   else:
-    valid_entries = True
-    message = 'New user succesfully registered.'
+    valid_pw = pw_valid(pw)
+    if valid_pw:
+     valid_entries = True
+     message = 'New user succesfully registered.'
+    else:
+     message = 'Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:'
   return valid_entries, message
 
 def statistics():

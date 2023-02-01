@@ -1,5 +1,5 @@
 <div
-  class="flex flex-col items-center grow w-min-40 w-max-56 h-full overflow-auto text-gray-400 bg-gray-900 rounded-md"
+  class="flex flex-col items-center grow w-min-40 w-max-56 h-full overflow-auto text-gray-400 bg-black bg-opacity-80 rounded-md"
 >
   <a class="flex flex-row items-center w-full px-3 mt-3 text-indigo-300">
     <svg
@@ -22,7 +22,7 @@
       class="flex flex-col items-center w-full mt-2 border-t border-gray-700"
     >
       <a
-        class="flex items-center w-full h-12 px-3 mt-1 rounded hover:bg-gray-700 hover:text-indigo-300"
+        class="flex items-center w-full h-12 px-3 mt-1 rounded hover:bg-gray-700 hover:text-indigo-400"
         href="{{url_for('welcome')}}"
       >
         <svg
@@ -43,7 +43,7 @@
       </a>
 
       <a
-        class="flex items-center w-full h-12 px-3 mt-1 rounded hover:bg-gray-700 hover:text-indigo-300"
+        class="flex items-center w-full h-12 px-3 mt-1 rounded hover:bg-gray-700 hover:text-indigo-400"
         href="{{url_for('add_task_render')}}"
       >
         <svg
@@ -64,7 +64,7 @@
         <span class="ml-2 text-sm font-medium">Add Task</span>
       </a>
       <a
-        class="flex items-center w-full h-12 px-3 mt-1 rounded hover:bg-gray-700 hover:text-indigo-300"
+        class="flex items-center w-full h-12 px-3 mt-1 rounded hover:bg-gray-700 hover:text-indigo-400"
         href="{{url_for('all_tasks_render')}}"
       >
         <svg
@@ -84,7 +84,7 @@
         <span class="ml-2 text-sm font-medium">All Tasks</span>
       </a>
       <a
-        class="flex items-center w-full h-12 px-3 mt-1 rounded hover:bg-gray-700 hover:text-indigo-300"
+        class="flex items-center w-full h-12 px-3 mt-1 rounded hover:bg-gray-700 hover:text-indigo-400"
         href="{{url_for('my_tasks_render')}}"
       >
         <svg
@@ -103,8 +103,9 @@
         </svg>
         <span class="ml-2 text-sm font-medium">My Tasks</span>
       </a>
+      {% set user = session.get('current_user') %} {% if user == 'admin': %}
       <a
-        class="flex items-center w-full h-12 px-3 mt-1 hover:bg-gray-700 hover:text-indigo-300 rounded"
+        class="flex items-center w-full h-12 px-3 mt-1 hover:bg-gray-700 hover:text-indigo-400 rounded"
         href="{{url_for('statistics_render')}}"
       >
         <svg
@@ -122,9 +123,9 @@
           />
         </svg>
         <span class="ml-2 text-sm font-medium">Statistics</span>
-      </a>
+      </a> {% endif %}
       <a
-        class="flex items-center w-full h-12 px-3 mt-1 hover:bg-gray-700 hover:text-indigo-300 rounded"
+        class="flex items-center w-full h-12 px-3 mt-1 hover:bg-gray-700 hover:text-indigo-400 rounded"
         href="{{url_for('register_form')}}"
       >
         <svg
@@ -149,7 +150,7 @@
       class="flex flex-col items-center w-full mt-0 border-t border-gray-700"
     >
       <a
-        class="flex items-center w-full h-12 px-3 mt-1 rounded hover:bg-gray-700 hover:text-indigo-300"
+        class="flex items-center w-full h-12 px-3 mt-1 rounded hover:bg-gray-700 hover:text-indigo-400"
         href="{{ url_for('logout') }}"
       >
         <svg
@@ -174,10 +175,10 @@
     </div>
   </div>
   <a
-    class="grid grid-row-3 items-center justify-center w-full h-27 mt-auto bg-gray-800 text-indigo-300 py-1"
+    class="grid grid-row-3 items-center justify-center w-full h-27 mt-auto bg-gray-800 bg-opacity-80 text-indigo-400 py-1"
   >
     <div
-      class="row-span-2 flex flex-flow-row items-center justify-center w-full py-0 my-0"
+      class="row-span-2 flex flex-flow-row bg-opacity-80 bg-gray-800 items-center justify-center w-full py-0 my-0"
     >
       <svg
         class="w-6 h-6 stroke-current"

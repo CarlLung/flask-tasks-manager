@@ -7,24 +7,36 @@
       type="text/css"
       href="{{ url_for('static', filename='css/main.css') }}"
     />
+    <style>
+      #bg_home {
+        background-image: url("{{ url_for('static', filename='img/jean-philippe-delberghe.jpg') }}");
+        background-size: cover;
+      }
+    </style>
   </head>
 
   <body>
     <div
-      class="min-h-screen bg-slate-200 py-6 flex flex-col justify-center sm:py-12"
+      class="min-h-screen bg-slate-200 py-6 flex flex-col sm:py-12"
+      id="bg_home"
     >
       <div
-        class="relative px-6 py-3 mx-auto w-full text-center"
+        class="relative mt-30 px-6 py-3 mx-auto w-full text-center"
         style="width: 40%"
       >
         <style scoped>
           input:focus {
             border-width: 2px;
           }
-        </style>
+        </style>  
         <div class="flex flex-col">
-          <span class="text-4xl mt-8 font-bold text-indigo-900 mb-3"
-            >Tasks Manager(Flask)</span
+          <div class="flex flex-row self-center content-center items-center"><p class="text-4xl mt-8 font-bold text-indigo-800 tracking-wide:widest mr-2 mb-3"
+            >Tasks Manager (Flask)</p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 mt-9 mb-3 shrink text-indigo-800">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+            </svg>
+          </div>
+          <span class="text-lg text-indigo-900 mb-3"
+            >Brought to you by: Carl K.K. Lung</span
           >
           <span class="text-xl shrink text-indigo-700 font-medium mr-2"
             >Login to your account</span
@@ -32,7 +44,7 @@
         </div>
 
         <div
-          class="mt-4 bg-slate-100 shadow-md rounded-lg text-left text-gray-600"
+          class="mt-4 bg-slate-100 shadow-md rounded-lg text-left text-gray-600 bg-opacity-80"
         >
           <div class="h-2 bg-indigo-700 rounded-t-md flex flex-col"></div>
           {% if not message and not get_flashed_messages(): %}
@@ -52,9 +64,12 @@
               {{ form.hidden_tag() }} {{ form.username.label(class="label block
               font-semibold text-indigo-700")}} {{ form.username(class="w-full
               h-5 mt-2 px-3 py-5 border rounded-md focus:outline-none
-              focus:ring-1 focus:ring-indigo-400", placeholder="Username") }} {{
-              form.password.label(class="label mt-3 block font-semibold
-              text-indigo-700") }} {{ form.password( class="w-full h-5 mt-2 px-3
+              focus:ring-1 focus:ring-indigo-400", placeholder="Username") }} 
+                {{
+                  form.password.label(class="label mt-3 block font-semibold
+                  text-indigo-700") }}
+                
+              {{ form.password( class="w-full h-5 mt-2 px-3
               py-5 border rounded-md focus:outline-none focus:ring-1
               focus:ring-indigo-400", placeholder="************") }} {{
               form.confirm.label(class="label mt-3 block font-semibold

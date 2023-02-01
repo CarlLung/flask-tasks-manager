@@ -1,8 +1,8 @@
 {% extends "./components/layout.html" %} {% block content %}
 
 <div class="flex flex-col items-center overflow-auto">
-  <p class="text-4xl mt-10 font-bold mb-3 text-indigo-900">
-    Welcome to your dashboard!
+  <p class="text-4xl mt-8 font-bold mb-3 text-indigo-900">
+    Welcome to the Tasks Manager dashboard!
   </p>
 
   <div class="flex flex-col">
@@ -30,7 +30,7 @@
       action=""
     >
       {{ form.hidden_tag() }} {{ form.command.label(class="label shrink text-lg
-      text-indigo-700 font-medium mr-3")}} {{ form.command(class=" bg-neutral-50
+      text-indigo-700 font-medium mr-3")}} {{ form.command(class=" bg-opacity-40 bg-neutral-50
       shrink w-60 mt-1 mb-1 px-3 mr-3 border h-8 rounded-md focus:outline-none
       focus:ring-1 focus:ring-indigo-400", placeholder=" a / va / vm / r / e" )
       }} {{ form.submit(class="py-auto px-2 text-center bg-indigo-700 text-white

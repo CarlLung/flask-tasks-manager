@@ -4,6 +4,7 @@ from modules.forms.add_form import AddForm
 from modules.forms.register_form import RegisterForm
 from modules.functions import *
 from flask import render_template, redirect, session, flash
+import pytz
 
 
 def login_form():
@@ -53,7 +54,7 @@ def welcome():
       return redirect('/all_tasks')
    elif command.lower() == 'vm':
       return redirect('/my_tasks')
-   elif command.lower() == 'r':
+   elif command.lower() == 'e':
       return redirect('/logout')
    else:
      message = "Invalid input. Please enter your command according to the options menu."
@@ -90,9 +91,14 @@ def add_task_render():
     session['message'] = message
     return redirect('/add_task')
    else:
-    message = 'Add Task Successful.'
-    session['message'] = message
-    return redirect('/add_task')
+    if pytz.utc.localize(form.due.data) < datetime.today(pytz.utc).date():
+      message = 'You cannot enter a date prior to today.'
+      session['message'] = message
+      return redirect('/add_task')
+    else:
+     message = 'Add Task Successful.'
+     session['message'] = message
+     return redirect('/add_task')
   return render_template('add_form.html', form=form, current_user=current_user)
 
 def all_tasks_render():
@@ -203,8 +209,8 @@ def unauthorised():
 
 def logout():
   session.clear()
-  message = 'You have logged out the sysyem. See you next time.'
-  return render_template('login_form.html', message=message, form=form)
+  flash('You have logged out the sysyem. See you next time!')
+  return redirect('/home')
 
 
 
