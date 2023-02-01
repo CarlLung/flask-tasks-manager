@@ -28,15 +28,32 @@
         class="flex w-full flex-col bg-indigo-100 bg-opacity-80 grow items-center rounded-md"
         id="content"
       >
-        {% with message = session.get('message') %} {% if message %}
+        {% with msg_err = session.get('msg_err') %} 
+        {% with success = session.get('success') %}
+        
+        {% if msg_err %}
         <div
           class="bg-red-500 rounded-md h-7 w-full text-white self-start text-center"
         >
-          {{ message }}
+          {{ msg_err }}
         </div>
-        {% do session.update({'message': None}) %} {% else %}
+        {% do session.update({'msg_err': None}) %}
+
+        {% elif success %}
+        <div
+          class="bg-green-400 rounded-md h-7 w-full text-white self-start text-center"
+        >
+          {{ success }}
+        </div>
+        {% do session.update({'success': None}) %} 
+        
+        {% else %}
+
         <div class="h-7"></div>
-        {% endif %} {% endwith %} {% block content %} {% endblock %}
+        {% endif %} {% endwith %} {% endwith %} 
+        
+        
+      {% block content %} {% endblock %}
       </div>
     </div>
   </body>

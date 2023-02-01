@@ -11,14 +11,20 @@
 >
   <form method="POST" action="">
     {{ form.hidden_tag() }} {{ form.username.label(class="label shrink text-xl
-    text-indigo-700 font-medium mr-2")}}<p class="text-xs text-gray-500">(</p>Name must be 8-20 characters long, contain only alphanumeric characters, dot or underscore)</p> {{ form.username(class="bg-opacity-40 shrink
+    text-indigo-700 font-medium mr-2")}}<p class="text-xs text-gray-500">(Name must be 8-20 characters long, contain only alphanumeric characters, dot or underscore)</p> {% for error in form.username.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %} {{ form.username(class="bg-opacity-40 shrink
     bg-neutral-50 w-full h-5 mt-1 mb-1 px-3 py-5 border rounded-md
     focus:outline-none focus:ring-1 focus:ring-indigo-400", placeholder="New User") }} {{ form.password.label(class="shrink label text-xl text-indigo-700
-    font-medium mr-2") }} <p class="text-xs text-gray-500">(must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character)</p>{{ form.password( class="shrink bg-neutral-50 w-full
+    font-medium mr-2") }} <p class="text-xs text-gray-500">(must contain minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character)</p>{% for error in form.password.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}{{ form.password( class="shrink bg-neutral-50 w-full
     h-5 mt-1 mb-1 px-3 py-5 border bg-opacity-40 rounded-md focus:outline-none focus:ring-1
     focus:ring-indigo-400", placeholder="************") }} {{
     form.confirm.label(class="shrink label text-xl text-indigo-700 font-medium
-    mr-2") }} {{ form.confirm( class="shrink bg-opacity-40 bg-neutral-50 w-full h-5 mt-1 px-3
+    mr-2") }} {% for error in form.confirm.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}{{ form.confirm( class="shrink bg-opacity-40 bg-neutral-50 w-full h-5 mt-1 px-3
     py-5 border rounded-md focus:outline-none focus:ring-1
     focus:ring-indigo-400", placeholder="************") }}
 

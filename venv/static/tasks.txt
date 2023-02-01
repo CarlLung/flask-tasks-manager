@@ -1,6 +1,12 @@
-admin, Register Users with taskManager.py, Use taskManager.py to add the usernames and passwords for all team members that will be using this program., 10 Oct 2019, 20 Oct 2019, No
-admin, Assign initial tasks, Use taskManager.py to assign each team member with appropriate tasks, 10 Oct 2019, 25 Oct 2019, No
-Test1, Test2, Test3, 19 Jan 2023, 31 Jan 2023, No
-test, I am, Ha Ha, 20 May 2023, 1 Feb 2023, No
-Test1, Test2, Test3, 19 Jan 2023, 31 Jan 2023, No
-aaa, bbb, ccc, 24 Feb 2023, 1 Feb 2023, No
+1, admin, Register Users with taskManager.py, Use taskManager.py to add the usernames and passwords for all team members that will be using this program., 10 Oct 2019, 20 Oct 2019, No
+2, admin, Assign initial tasks, Use taskManager.py to assign each team member with appropriate tasks, 10 Oct 2019, 25 Oct 2019, No
+3, Test1, Test2, Test3, 19 Jan 2023, 31 Jan 2023, No
+4, test, I am, Ha Ha, 20 May 2023, 1 Feb 2023, No
+5, Test1, Test2, Test3, 19 Jan 2023, 31 Jan 2023, No
+6, aaa, bbb, ccc, 24 Feb 2023, 1 Feb 2023, No
+c3e6734e-a7a4-4fde-9333-05cb156efa29, Hi, Bye, Shit, 16 Dec 2022, 1 Feb 2023, No
+e48fde70-8efa-4c0d-a492-2c30d1bd1118, hi, bye, gg, 17 Nov 2022, 1 Feb 2023, No
+4d415078-5fac-48de-9c66-50d4de7db051, hi, bye, gg, 14 Dec 2022, 1 Feb 2023, No
+4d415078-5fac-48de-9c66-50d4de7db051, fsgjol, skdhkusg, kuagkdz, 2 Feb 2023, 1 Feb 2023, No
+438c8e0d-49b4-4358-afdd-2f8601b928c1, ttt, ddd, eee, 15 Feb 2023, 1 Feb 2023, No
+76a5e241-4aa7-4e21-a150-f5a28d5e2155, asdfdasoj, afoskaps, ladfihalidfh, 10 Nov 2022, 1 Feb 2023, No
