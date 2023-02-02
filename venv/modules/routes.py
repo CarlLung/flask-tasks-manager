@@ -3,7 +3,7 @@ from modules.forms.command_form import CmdForm
 from modules.forms.add_form import AddForm
 from modules.forms.register_form import RegisterForm
 from modules.functions import *
-from flask import render_template, redirect, session
+from flask import render_template, redirect, session, flash
 
 
 def login_form():
@@ -37,12 +37,12 @@ def login_form():
 def welcome():
   not_login = not_logged_in()
   if not_login:
-    session['msg_err'] = "Content only available for logged in users."
+    flash("Content only available for logged in users.")
     return redirect('/home')
 
   expired = expired_session()
   if expired:
-    session['msg_err'] = "Login session timed out. Please login again."
+    flash("Login session timed out. Please login again.")
     return redirect('/home')
   
   current_user = session.get('current_user')
@@ -63,58 +63,65 @@ def welcome():
    else:
      msg_err = "Invalid input. Please enter your command according to the options menu."
      session['msg_err'] = msg_err
-     return redirect('/welcome')
+     return render_template('/welcome', form=form, current_user=current_user)
 
   if not not_login:
    return render_template('welcome.html', form=form, current_user=current_user)
 
 def add_task_render():
   not_login = not_logged_in()
-  if not_login == True:
-    session['msg_err'] = "Content only available for logged in users."
+  if not_login:
+    flash("Content only available for logged in users.")
     return redirect('/home')
-  
+
   expired = expired_session()
   if expired:
-    session['msg_err'] = "Login session timed out. Please login again."
+    flash("Login session timed out. Please login again.")
     return redirect('/home')
 
   current_user = session.get('current_user')
 
   form = AddForm()
-  msg_err = ''
-  success =''
+  users_dict = get_users()
   if form.validate_on_submit():
    responsible = form.responsible.data
    title = form.title.data
    description = form.description.data
    due = form.due.data
-   try:
-    add_task(responsible, title, description, due)
-   except:
-    msg_err  = 'An error occured.'
-    session['msg_err '] = msg_err 
-    return redirect('/add_task')
+
+   user_exists = any(key == responsible for key in users_dict)
+   invalid_due = form.due.data < datetime.now().date()
+   
+   if invalid_due:
+     msg_err  = 'You cannot enter a date prior to today.'
+     session['msg_err'] = msg_err
+     return render_template('add_form.html', form=form, current_user=current_user)
+   elif not user_exists:
+     msg_err  = 'Cannot find user in our system.'
+     session['msg_err'] = msg_err
+     return render_template('add_form.html', form=form, current_user=current_user)
    else:
-    if form.due.data < datetime.now().date():
-      msg_err  = 'You cannot enter a date prior to today.'
-      session['msg_err '] = msg_err
-      return redirect('/add_task')
-    else:
-     success = 'Add Task Successful.'
-     session['success'] = success
-     return redirect('/add_task')
+     try:
+      add_task(responsible, title, description, due)
+     except:
+      msg_err  = 'An error occured.'
+      session['msg_err'] = msg_err
+      return render_template('add_form.html', form=form, current_user=current_user)
+     else: 
+      success = 'Add Task Successful.'
+      session['success'] = success
+     return render_template('add_form.html', form=form, current_user=current_user)
   return render_template('add_form.html', form=form, current_user=current_user)
 
 def all_tasks_render():
   not_login = not_logged_in()
-  if not_login == True:
-    session['msg_err'] = "Content only available for logged in users."
+  if not_login:
+    flash("Content only available for logged in users.")
     return redirect('/home')
-  
+
   expired = expired_session()
   if expired:
-    session['msg_err'] = "Login session timed out. Please login again."
+    flash("Login session timed out. Please login again.")
     return redirect('/home')
 
   current_user = session.get('current_user')
@@ -125,13 +132,13 @@ def all_tasks_render():
 def my_tasks_render():
   
   not_login = not_logged_in()
-  if not_login == True:
-    session['msg_err'] = "Content only available for logged in users."
+  if not_login:
+    flash("Content only available for logged in users.")
     return redirect('/home')
-  
+
   expired = expired_session()
   if expired:
-    session['msg_err'] = "Login session timed out. Please login again."
+    flash("Login session timed out. Please login again.")
     return redirect('/home')
   
   current_user = session.get('current_user')
@@ -143,20 +150,18 @@ def my_tasks_render():
 
 def register_form():
   not_login = not_logged_in()
-  if not_login == True:
-    session['msg_err'] = "Content only available for logged in users."
+  if not_login:
+    flash("Content only available for logged in users.")
     return redirect('/home')
-  
+
   expired = expired_session()
   if expired:
-    session['msg_err'] = "Login session timed out. Please login again."
+    flash("Login session timed out. Please login again.")
     return redirect('/home')
   
   current_user = session.get('current_user') 
 
   form = RegisterForm()
-  msg_err  = ''
-  success = ''
   valid_entries = False
   current_user = session.get('current_user')
   if current_user != 'admin':
@@ -168,28 +173,28 @@ def register_form():
    try:
     valid_entries, msg_err, success  = register(username, password, confirm)
    except:
-    msg_err = 'An error occured.'
-    return redirect('/register')
+    session['msg_err'] = msg_err
+    return render_template('register_form.html', form=form, current_user=current_user)
    else:
      if valid_entries:
       with open ('static/user.txt', 'a') as f_user:
        f_user.write(f"{username}, {password}\n")
        session['success'] = success
-      return redirect('/register')
+      return render_template('register_form.html', form=form, current_user=current_user)
      else:
        session['msg_err'] = msg_err
-       return redirect('/register')
+       return render_template('register_form.html', form=form, current_user=current_user)
   return render_template('register_form.html', form=form, current_user=current_user)
 
 def statistics_render():
   not_login = not_logged_in()
-  if not_login == True:
-    session['msg_err'] = "Content only available for logged in users."
+  if not_login:
+    flash("Content only available for logged in users.")
     return redirect('/home')
-  
+
   expired = expired_session()
   if expired:
-    session['msg_err'] = "Login session timed out. Please login again."
+    flash("Login session timed out. Please login again.")
     return redirect('/home')
   
   current_user = session.get('current_user')
@@ -198,15 +203,14 @@ def statistics_render():
   return render_template('statistics.html', number_users=number_users, number_tasks=number_tasks, current_user=current_user )
 
 def unauthorised():
-
   not_login = not_logged_in()
-  if not_login == True:
-    session['msg_err'] = "Content only available for logged in users."
+  if not_login:
+    flash("Content only available for logged in users.")
     return redirect('/home')
-  
+
   expired = expired_session()
   if expired:
-    session['success'] = 'You have logged out the sysyem. See you next time!'
+    flash("Login session timed out. Please login again.")
     return redirect('/home')
   
   current_user = session.get('current_user')

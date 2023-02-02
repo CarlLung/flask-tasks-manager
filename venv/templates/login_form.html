@@ -59,15 +59,21 @@
           </p>
           {% do session.update({'msg_err': None}) %} 
 
+          {% elif get_flashed_messages(): %}
+          {% for msg_err in get_flashed_messages() %}
+          <div class="bg-red-500 h-7 text-white self-start text-center">
+            {{ msg_err }}
+          </div>
+          {% endfor %}
+
           {% elif success: %}
           <p class="bg-green-400 h-7 w-full text-white self-start text-center">
             {{success}}
           </p>
           {% do session.update({'success': None}) %} 
-        
-        {% else %}
-        <div class="h-7 self-start"></div>
-        {% endif %} {% endwith %}{% endwith %}
+          {% else %}
+          <div class="h-7 self-start"></div>
+          {% endif %} {% endwith %}{% endwith %}
 
 
          

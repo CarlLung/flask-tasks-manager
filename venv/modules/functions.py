@@ -93,6 +93,8 @@ def register(name, pw, pw2):
   users_dict = get_users()
   duplicate_name = any(key == name for key in users_dict)
   valid_entries = False
+  success = ''
+  msg_err = ''
   valid_name = name_valid(name) 
   if not valid_name:
     msg_err  = 'Name must be 8-20 characters long, contain only alphanumeric characters, dot or underscore.'
