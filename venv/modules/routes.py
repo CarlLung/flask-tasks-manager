@@ -63,7 +63,7 @@ def welcome():
    else:
      msg_err = "Invalid input. Please enter your command according to the options menu."
      session['msg_err'] = msg_err
-     return render_template('/welcome', form=form, current_user=current_user)
+     return render_template('welcome.html', form=form, current_user=current_user)
 
   if not not_login:
    return render_template('welcome.html', form=form, current_user=current_user)
@@ -91,7 +91,7 @@ def add_task_render():
 
    user_exists = any(key == responsible for key in users_dict)
    invalid_due = form.due.data < datetime.now().date()
-   
+
    if invalid_due:
      msg_err  = 'You cannot enter a date prior to today.'
      session['msg_err'] = msg_err
@@ -198,8 +198,11 @@ def statistics_render():
     return redirect('/home')
   
   current_user = session.get('current_user')
+  if current_user != 'admin':
+   return render_template('unauthorised.html', current_user=current_user)
 
   number_users, number_tasks = statistics()
+  
   return render_template('statistics.html', number_users=number_users, number_tasks=number_tasks, current_user=current_user )
 
 def unauthorised():
