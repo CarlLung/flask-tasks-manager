@@ -20,10 +20,16 @@
     style="margin-left: 7vw; margin-right: 8vw"
     id="bg_main"
   >
+
+
     <div class="flex flex-row justify-center relative " style="height: 90vh; width: 85vw">
+
+
       <div class="grow-0 shrink basis-40" id="sidemenu">
         {% include "./components/sidemenu.html" %}
       </div>
+
+
       <div
         class="flex w-full flex-col bg-indigo-100 bg-opacity-80 grow items-center rounded-md"
         id="content"
@@ -37,6 +43,7 @@
         >
           {{ msg_err }}
         </div>
+
         {% do session.update({'msg_err': None}) %}
 
         {% elif success %}
@@ -45,6 +52,7 @@
         >
           {{ success }}
         </div>
+
         {% do session.update({'success': None}) %} 
         
         {% else %}
@@ -52,8 +60,9 @@
         <div class="h-7"></div>
         {% endif %} {% endwith %} {% endwith %} 
         
-        
+        <div>
       {% block content %} {% endblock %}
+    </div>
       </div>
     </div>
   </body>

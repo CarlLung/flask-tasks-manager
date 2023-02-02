@@ -513,6 +513,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.visible {
+  visibility: visible;
+}
+
 .static {
   position: static;
 }
@@ -521,12 +525,12 @@ video {
   position: relative;
 }
 
-.row-span-2 {
-  grid-row: span 2 / span 2;
-}
-
 .row-span-1 {
   grid-row: span 1 / span 1;
+}
+
+.row-span-2 {
+  grid-row: span 2 / span 2;
 }
 
 .mx-5 {
@@ -601,12 +605,24 @@ video {
   margin-right: 0.75rem;
 }
 
-.ml-3 {
-  margin-left: 0.75rem;
+.ml-6 {
+  margin-left: 1.5rem;
 }
 
 .ml-2 {
   margin-left: 0.5rem;
+}
+
+.ml-5 {
+  margin-left: 1.25rem;
+}
+
+.ml-10 {
+  margin-left: 2.5rem;
+}
+
+.ml-3 {
+  margin-left: 0.75rem;
 }
 
 .mt-0 {
@@ -733,6 +749,10 @@ video {
 
 .basis-40 {
   flex-basis: 10rem;
+}
+
+.grid-rows-2 {
+  grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -945,6 +965,10 @@ video {
 
 .pt-3 {
   padding-top: 0.75rem;
+}
+
+.pl-12 {
+  padding-left: 3rem;
 }
 
 .text-left {

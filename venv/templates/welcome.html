@@ -1,44 +1,109 @@
 {% extends "./components/layout.html" %} {% block content %}
 
-<div class="flex flex-col items-center overflow-auto">
-  <p class="text-4xl mt-8 font-bold mb-3 text-indigo-900">
-    Welcome to the Tasks Manager dashboard!
-  </p>
+<div class="grid-rows-2">
+  <div class="row-span-1 flex flex-col items-center overflow-auto">
+    <p class="text-4xl mt-2 font-bold mb-3 text-indigo-900">
+      Welcome to the Tasks Manager dashboard!
+    </p>
 
-  <div class="flex flex-col">
-    <p class="shrink text-lg text-indigo-700 text-center font-medium mr-2">
-      Please select one of the following options:
+    <div class="flex flex-col">
+      <p class="shrink text-lg text-indigo-700 text-center font-medium mr-2">
+        Please select one of the following options:
+      </p>
+      <p
+        class="shrink mt-2 text-lg text-indigo-900 text-center font-medium mr-2"
+      >
+        Enter 'a' - to add task
+      </p>
+      <p class="shrink text-lg text-indigo-900 text-center font-medium mr-2">
+        Enter 'va' - to view all tasks
+      </p>
+      <p class="shrink text-lg text-indigo-900 text-center font-medium mr-2">
+        Enter 'vm' - view my tasks
+      </p>
+      <p class="shrink text-lg text-indigo-900 text-center font-medium mr-2">
+        Enter 'r' - to register user
+      </p>
+      <p
+        class="shrink text-lg mb-2 text-indigo-900 text-center font-medium mr-2"
+      >
+        Enter 'e' - to exit the system
+      </p>
+      <form
+        method="POST"
+        class="flex flex-row h-10 justify-center items-center"
+        action=""
+      >
+        {{ form.hidden_tag() }} {{ form.command.label(class="label shrink
+        text-lg text-indigo-700 font-medium mr-3")}}{% for error in
+        form.command.errors %}
+        <span style="color: red">[{{ error }}]</span>
+        {% endfor %} {{ form.command(class=" bg-opacity-40 bg-neutral-50 shrink
+        w-60 mt-1 mb-1 px-3 mr-3 border h-8 rounded-md focus:outline-none
+        focus:ring-1 focus:ring-indigo-400", placeholder=" a / va / vm / r / e"
+        ) }} {{ form.submit(class="py-auto px-2 text-center bg-indigo-700
+        text-white rounded-md h-8 hover:bg-indigo-800 active:bg-indigo-900 w-fit
+        uppercase tracking-wide") }}
+      </form>
+    </div>
+  </div>
+  <div class="flex flex-col ml-6 pl-12 pr-30">
+    <p class="text-xl text-indigo-800">Features Spotlight</p>
+    <p class="text-md text-indigo-700 ml-2 mt-2">Form Validations Examples:</p>
+    <ul class="text-sm text-indigo-900 ml-5">
+      <li>
+        1) Used RegEx for adding constraints to registration form on username
+        and password (Add new user).
+      </li>
+      <li>
+        2) User cannot enter Due date that is prior to today ( Add new task).
+      </li>
+      <li>
+        3) Cannot assign new task to users that is not found in the system ( Add
+        new task).
+      </li>
+      <li>
+        4) Return error if password does not match with confirm password, or
+        credentials not matched in user.txt. (Log in and add new user).
+      </li>
+    </ul>
+    <p class="text-sm text-indigo-900 ml-10">
+      Et cetera, and many more to be explored ...
     </p>
-    <p class="shrink mt-2 text-lg text-indigo-900 text-center font-medium mr-2">
-      Enter 'a' - to add task
+    <p class="text-md text-indigo-700 ml-2 mt-2">Authorisation</p>
+    <ul class="text-sm ml-10">
+      <li>
+        Entering links for the specific pages would be redirected to home page
+        with error message if not logged in.
+      </li>
+      <li>
+        Login session would be timed out after 5 minutes. If the user clicked
+        any where after the time out, the user would be redirected to the login
+        page.
+      </li>
+    </ul>
+    <p class="text-md text-indigo-700 ml-2 mt-2">Authentication</p>
+    <ul class="text-sm text-indigo-900 ml-10">
+      <li>
+        For user - admin, the tab Statistics would appear on the side menu, but
+        not visible to other users.
+      </li>
+      <li>
+        New user registration tab is visible for all, but the form is only
+        accessible to the admin. Other users are blocked from seeing the form
+        and redirected to another page.
+      </li>
+    </ul>
+    <p class="text-md text-indigo-700 ml-2 mt-2">Error Handling</p>
+    <p class="text-sm text-indigo-900 ml-10">
+      Error or success message would be returned to all the actions mentioned
+      above.
     </p>
-    <p class="shrink text-lg text-indigo-900 text-center font-medium mr-2">
-      Enter 'va' - to view all tasks
+    <p class="text-indigo-800 mt-4 ml-10" style="font-size: 7px">
+      Credits for Unsplash license images: 1) Jean-Philippe Delberghe
+      https://unsplash.com/photos/75xPHEQBmvA 2) Pawel Czerwinski
+      https://unsplash.com/photos/l8DUam8vtbc
     </p>
-    <p class="shrink text-lg text-indigo-900 text-center font-medium mr-2">
-      Enter 'vm' - view my tasks
-    </p>
-    <p class="shrink text-lg text-indigo-900 text-center font-medium mr-2">
-      Enter 'r' - to register user
-    </p>
-    <p class="shrink text-lg mb-2 text-indigo-900 text-center font-medium mr-2">
-      Enter 'e' - to exit the system
-    </p>
-    <form
-      method="POST"
-      class="flex flex-row h-10 justify-center items-center"
-      action=""
-    >
-      {{ form.hidden_tag() }} {{ form.command.label(class="label shrink text-lg
-      text-indigo-700 font-medium mr-3")}}{% for error in form.command.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-      {% endfor %} {{ form.command(class=" bg-opacity-40 bg-neutral-50
-      shrink w-60 mt-1 mb-1 px-3 mr-3 border h-8 rounded-md focus:outline-none
-      focus:ring-1 focus:ring-indigo-400", placeholder=" a / va / vm / r / e" )
-      }} {{ form.submit(class="py-auto px-2 text-center bg-indigo-700 text-white
-      rounded-md h-8 hover:bg-indigo-800 active:bg-indigo-900 w-fit uppercase
-      tracking-wide") }}
-    </form>
   </div>
 </div>
 
