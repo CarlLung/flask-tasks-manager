@@ -112,8 +112,8 @@ def add_task_render():
 # Utilising Flask WTF form
   form = AddForm()
 
-# Call on get_users function in functions.py to get a dictionary of users
-  users_dict = get_users()
+# Call on view_mine function in functions.py to get a dictionary of users
+  users_dict = view_mine()
 # Upon form submission, store values entered in the form
   if form.validate_on_submit():
    responsible = form.responsible.data
@@ -151,7 +151,7 @@ def add_task_render():
 
 #----------Rendering All tasks------------
 
-def all_tasks_render():
+def view_all_render():
 # Call not_logged_in and expired_session in functions,py to check if the user is logged in or not/ or the session expired
 # If not logged in or session expired, return to login page with messages
   not_login = not_logged_in()
@@ -167,13 +167,13 @@ def all_tasks_render():
 # Get current user from session 
   current_user = session.get('current_user')
 
-# Call get_tasks function in functions.py to get the full list of tasks in tasks.txt and render the tasks
-  tasks_list = get_tasks()
+# Call view_all function in functions.py to get the full list of tasks in tasks.txt and render the tasks
+  tasks_list = view_all()
   return render_template('all_tasks.html', tasks_list=tasks_list, current_user=current_user)
 
 #----------Rendering All current user's tasks------------
 
-def my_tasks_render():
+def view_mine_render():
 # Call not_logged_in and expired_session in functions,py to check if the user is logged in or not/ or the session expired
 # If not logged in or session expired, return to login page with messages
   not_login = not_logged_in()
@@ -186,8 +186,8 @@ def my_tasks_render():
     flash("Login session timed out. Please login again.")
     return redirect('/home')
 
-# Call get_tasks function in functions.py to get the full list of tasks in tasks.txt
-  tasks_list = get_tasks()
+# Call view_all function in functions.py to get the full list of tasks in tasks.txt
+  tasks_list = view_all()
 # Use python filter method to return a new list of tasks with the key equals to the current user's username
   current_user = session.get('current_user')
   my_tasks_list = filter(lambda x: x.responsible == current_user, tasks_list)
@@ -196,7 +196,7 @@ def my_tasks_render():
 
 #----------Rendering New User Registration------------
 
-def register_form():
+def reg_user_render():
 # Call not_logged_in and expired_session in functions,py to check if the user is logged in or not/ or the session expired
 # If not logged in or session expired, return to login page with messages
   not_login = not_logged_in()
@@ -227,7 +227,7 @@ def register_form():
 # use try...except to call on register function in functions.py (passing in form entries)
 # to check if the extries passes the validation conditions
    try:
-    valid_entries, msg_err, success  = register(username, password, confirm)
+    valid_entries, msg_err, success  = reg_user(username, password, confirm)
 # Errors catching
    except:
     session['msg_err'] = msg_err
