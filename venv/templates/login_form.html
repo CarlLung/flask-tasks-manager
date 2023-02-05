@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <!-- Home page with login form -->
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
@@ -48,7 +49,7 @@
         >
           <div class="h-2 bg-indigo-700 rounded-t-md flex flex-col"></div>
 
-
+<!-- Conditionals for displaying success or error messages -->
 
           {% with success = session.get('success') %}
           {% with msg_err = session.get('msg_err') %} 
@@ -76,29 +77,43 @@
           {% endif %} {% endwith %}{% endwith %}
 
 
-         
+<!-- The login form -->         
 
           <div class="px-8 pb-8 pt-3">
             <form method="POST" action="">
               {{ form.hidden_tag() }} {{ form.username.label(class="label block
-              font-semibold text-indigo-700")}} {% for error in form.username.errors %}
+              font-semibold text-indigo-700")}}
+              
+              {% for error in form.username.errors %}
               <span style="color: red;">[{{ error }}]</span>
-              {% endfor %}{{ form.username(class="w-full
+              {% endfor %}
+              
+              {{ form.username(class="w-full
               h-5 mt-2 px-3 py-5 border rounded-md focus:outline-none
               focus:ring-1 focus:ring-indigo-400", placeholder="Username") }} 
+
+
                 {{
                   form.password.label(class="label mt-3 block font-semibold
                   text-indigo-700") }}
+
                   {% for error in form.password.errors %}
                   <span style="color: red;">[{{ error }}]</span>
                   {% endfor %}
+
               {{ form.password( class="w-full h-5 mt-2 px-3
               py-5 border rounded-md focus:outline-none focus:ring-1
-              focus:ring-indigo-400", placeholder="************") }} {{
+              focus:ring-indigo-400", placeholder="************") }} 
+              
+              {{
               form.confirm.label(class="label mt-3 block font-semibold
-              text-indigo-700") }}{% for error in form.confirm.errors %}
+              text-indigo-700") }}
+              
+              {% for error in form.confirm.errors %}
               <span style="color: red;">[{{ error }}]</span>
-              {% endfor %} {{ form.confirm( class="w-full h-5 mt-2 mb-2
+              {% endfor %} 
+              
+              {{ form.confirm( class="w-full h-5 mt-2 mb-2
               px-3 py-5 border rounded-md focus:outline-none focus:ring-1
               focus:ring-indigo-400", placeholder="************") }}
 

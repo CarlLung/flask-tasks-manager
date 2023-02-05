@@ -1,0 +1,190 @@
+from datetime import datetime
+from flask import session
+import pytz
+import re
+import uuid
+
+# Create a class for task objects, containing the necessary info required in a task
+class Task:
+   def __init__(self, responsible, title, description, due, id = uuid.uuid4(), created_date = datetime.today().strftime('%-d %b %Y'), completed = 'No'):
+       self.id = id
+       self.responsible = responsible
+       self.title = title
+       self.description = description
+       self.due = due
+       self.created_date = created_date
+       self.completed = completed
+
+#----------Function for turning the data in user.txt ------------
+#-----into a dictionary with key: username, value: password -----
+
+# Using split by ', ', and then putting the items in the returned array into a dictionary
+
+def get_users():
+ users_dict = {}
+ with open ('static/user.txt', 'r') as f_user:
+    for line in f_user:
+      split = line.split(', ')
+      users_dict.update({split[0] : split[1].replace('\n', '')})
+ return users_dict
+
+#----------Function for checking credentials in the login form ------------
+
+# Form entries would be passed in as arguments
+def check_credentials(name, pw, pw2):
+# use get_users function to get the dictionary of all users
+     users_dict = get_users()
+# Declare variables for error/ success message
+     msg_err = ''
+     success = ''
+# Declare boolean variable for indicating status of login
+     isLoggedIn = False
+# Declare variable to be stored in the session as logged in information
+     current_user = ''
+# If the confirm password does not match the first password, return error
+     if pw != pw2:
+       msg_err = 'Second password entry does not match first password entry.'
+# Check the entered username, if it exists as a key in the users dictionary
+# Also checking if the password matches the password value for the respective key in the dictionary
+# If matches both, indicate login success by the boolean variable isLoggedIn
+     else:
+      if name in users_dict.keys():
+        if pw == users_dict[name] and pw == pw2:
+           current_user = name
+           success = 'Login successful.'
+           isLoggedIn = True
+# If the credentials does not match the two conditions, return error
+        else:    
+          msg_err = 'Incorrect credentials. Please enter again.'
+          isLoggedIn = False
+      else:
+        msg_err = 'Incorrect credentials. Please enter again.'
+        isLoggedIn = False
+# Return the variables that now stored the username and login status(if success), and the messages
+# The variables would be returned to the login_form function in routes.py for rendering purpose
+     return success, msg_err, isLoggedIn, current_user
+
+#----------Function for setting session to be expired------------
+
+def expired_session():
+  expired = False
+# If there are log in information in the session
+# Check if 5 mins is already passed after log in
+# If yes, clear the log in session and return a bollean variable - expired as an indicator
+  if 'logged_in_at' in session:
+    session['logged_in_at'] = pytz.utc.localize(session['logged_in_at'].replace(tzinfo=None))
+    elapsed_time = datetime.now(pytz.utc) - session['logged_in_at']
+
+    if elapsed_time.seconds > 5 * 60: 
+      session.clear()
+      expired = True
+  return expired
+
+#----------Function for checking if user is logged in or not by accessing the session------------
+
+def not_logged_in():
+  not_login = False
+  if session.get('logged_in') == None:
+    not_login = True
+  return not_login
+
+#----------Function for writing new task into the tasks.txt------------
+
+# Form entries would be passed in as arguments
+def add_task(responsible, title, description, due):
+# Ensuring ', ' does not exists in the description, otherwise when reading the tasks.txt
+# the info could not be extracted properly, as we are using split by ', ' to extract the information
+  description.replace(', ', ',')
+# Casting the correct type (string) and format to the form entry of due date
+  due = due.strftime('%-d %b %Y')
+# Pass the form entries into the class Task to give an object
+  task = Task(responsible, title, description, due)
+# Using the object's keys and turn them into a single string
+# Write the string into a new line in the tasks.txt file
+  with open ('static/tasks.txt', 'a') as f_task:
+   f_task.write(f"{task.id}, {task.responsible}, {task.title}, {task.description}, {task.due}, {task.created_date}, {task.completed}\n")
+
+#----------Function for turning the data in tasks.txt ------------
+#-----------------into a list of task objects --------------------
+
+def get_tasks():
+# Declare variable to store the list
+  tasks_list = []
+# Read the lines in tasks.txt, turn the info into items inside a list using split by ', '
+  with open ('static/tasks.txt', 'r') as f_task:
+   for line in f_task:
+    split = line.split(', ')
+# Form a task objects by the class Task by passing the items inside the list in to the class
+    task = Task(split[1], split[2], split[3], split[4], split[0], split[5], split[6].replace('\n', ''))
+# For each task, append it to the list
+# when the for loop is finished, the list will contain all information in the tasks.txt
+# in the form of a list of task objects
+    tasks_list.append(task)
+  return tasks_list
+
+#----------Function for password validation------------
+#----------------by utilising RegEx--------------------
+
+def pw_valid(pw):
+  pw_pattern = re.compile(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#%?&+-^=])[A-Za-z\d@$!%+#-%^=*?&]{8,}$")
+  return re.match(pw_pattern, pw) is not None
+
+#----------Function for username validation------------
+#----------------by utilising RegEx--------------------
+
+def name_valid(name):
+  name_pattern = re.compile(r"^[\w\d\._]{8,20}$")
+  return re.match(name_pattern, name) is not None
+
+#----------Function for checking validity of form entries------------
+#---------------for the new user registration form-------------------
+
+# Form entries would be passed as arguments
+def register(name, pw, pw2):
+# get the dictionary of all users from user.txt
+  users_dict = get_users()
+# boolean variable indicating if the new username already existed or not
+# by using python any method, checking if the username entry matches any keys inside the dictionary 
+  duplicate_name = any(key == name for key in users_dict)
+# Declare variables to be returned to routes.py for rendering
+  valid_entries = False
+  success = ''
+  msg_err = ''
+# Call on name_valid function above to validate on the username format
+  valid_name = name_valid(name) 
+# Return error if username format does not meet format requirements
+  if not valid_name:
+    msg_err  = 'Name must be 8-20 characters long, contain only alphanumeric characters, dot or underscore.'
+# Return error if the name is already existing
+  elif duplicate_name:
+    msg_err  = 'Username is taken. Try another one.'
+# Return error if the confirmation password does not match the first password entry
+  elif pw != pw2:
+    msg_err  = 'Second password entry does not match first password entry.'
+# Call on pw_valid function above to validate on the password format
+  else:
+    valid_pw = pw_valid(pw)
+# Set boolean variable as true to indicate passing of all validations
+# also set the success message to be displayed
+    if valid_pw:
+     valid_entries = True
+     success = 'New user succesfully registered.'
+# Return error if password format does not meet format requirements
+    else:
+     msg_err  = 'Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character.'
+# Return validity indicator (boolean variable) and message to be used in rendering registration page (routes.py)
+  return valid_entries, msg_err, success
+
+#----------Function for getting statistics numbers------------
+def statistics():
+# Get a dictionary of all data from user.txt
+  users_dict = get_users()
+# Get the length of the dictionary as the total number of all users
+  number_users = len(users_dict)
+# Get a list of all data from user.txt
+  tasks_list = get_tasks()
+# Get the length of the list as the total number of all tasks
+  number_tasks = len(tasks_list)
+# Return the variables to routes.py for rendering by statistics_render function
+  return number_users, number_tasks 
+

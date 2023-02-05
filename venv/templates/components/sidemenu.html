@@ -1,3 +1,5 @@
+<!-- Side menu -->
+
 <div
   class="flex flex-col items-center grow w-min-40 w-max-56 h-full overflow-auto text-gray-400 bg-black bg-opacity-80 rounded-md"
 >
@@ -102,6 +104,9 @@
           />
         </svg>
         <span class="ml-2 text-sm font-medium">My Tasks</span>
+
+        <!-- The tab Statistics will only be shown for admin -->
+        <!-- By getting the current_user stored in the session -->
       </a>
       {% set user = session.get('current_user') %} {% if user == 'admin': %}
       <a
@@ -123,7 +128,8 @@
           />
         </svg>
         <span class="ml-2 text-sm font-medium">Statistics</span>
-      </a> {% endif %}
+      </a>
+      {% endif %}
       <a
         class="flex items-center w-full h-12 px-3 mt-1 hover:bg-gray-700 hover:text-indigo-400 rounded"
         href="{{url_for('register_form')}}"

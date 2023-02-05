@@ -3,9 +3,6 @@ from modules import routes
 from flask import Flask
 from datetime import timedelta
 
-
-
-
 app = Flask(  # Create a flask app
 	__name__,
 	template_folder='templates',  # Name of html file folder
@@ -28,7 +25,7 @@ app.route('/logout')(routes.logout)
 
 
 app.config['SECRET_KEY'] = '123456'
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
 """ if __name__ == "__main__":  # Makes sure this is the main process
 	app.run( # Starts the site

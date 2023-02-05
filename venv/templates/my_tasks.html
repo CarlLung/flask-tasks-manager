@@ -1,7 +1,10 @@
 {% extends "./components/layout.html" %} {% block content %}
 
+<!-- Show all tasks of the the current user-->
+
 <p class="text-4xl font-bold mb-3 text-indigo-900">My Tasks</p>
   <div class="sm:h-300 md:h-675 shrink" style="overflow:scroll">
+  <!-- Using for loop on the list of task objects -->
   {% for task in my_tasks_list %}
 
   <div

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <!-- Main layout for every pages -->
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
@@ -20,49 +21,41 @@
     style="margin-left: 7vw; margin-right: 8vw"
     id="bg_main"
   >
-
-
-    <div class="flex flex-row justify-center relative " style="height: 90vh; width: 85vw">
-
-
+    <div
+      class="flex flex-row justify-center relative"
+      style="height: 90vh; width: 85vw"
+    >
       <div class="grow-0 shrink basis-40" id="sidemenu">
         {% include "./components/sidemenu.html" %}
       </div>
-
 
       <div
         class="flex w-full flex-col bg-indigo-100 bg-opacity-80 grow items-center rounded-md"
         id="content"
       >
-        {% with msg_err = session.get('msg_err') %} 
-        {% with success = session.get('success') %}
-        
-        {% if msg_err %}
+        <!-- See if there are success or error messages available in the flask session-->
+        <!-- Show the message in red or green if the message is available -->
+        {% with msg_err = session.get('msg_err') %} {% with success =
+        session.get('success') %} {% if msg_err %}
         <div
           class="bg-red-500 rounded-md h-7 w-full text-white self-start text-center"
         >
           {{ msg_err }}
         </div>
 
-        {% do session.update({'msg_err': None}) %}
-
-        {% elif success %}
+        {% do session.update({'msg_err': None}) %} {% elif success %}
         <div
           class="bg-green-400 rounded-md h-7 w-full text-white self-start text-center"
         >
           {{ success }}
         </div>
 
-        {% do session.update({'success': None}) %} 
-        
-        {% else %}
+        {% do session.update({'success': None}) %} {% else %}
 
         <div class="h-7"></div>
-        {% endif %} {% endwith %} {% endwith %} 
-        
-        <div>
-      {% block content %} {% endblock %}
-    </div>
+        <!-- Insert content -->
+        {% endif %} {% endwith %} {% endwith %} {% block content %} {% endblock
+        %}
       </div>
     </div>
   </body>
