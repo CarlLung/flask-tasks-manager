@@ -7,7 +7,7 @@
 <p>{{message}}</p>
 
 <div
-  class="px-8 py-6 shrink h-fit sm:h-300 md:h-700 items-center content-center w-full mx-5 my-1 bg-indigo-50 bg-opacity-60 rounded-xl shadow-md overflow-auto max-w-3xl"
+  class="px-8 py-6 shrink h-fit sm:h-300 md:h-700 items-center content-center w-full mx-5 my-1 bg-indigo-50 bg-opacity-40 rounded-xl shadow-md overflow-auto max-w-3xl"
   style="width: 85%"
 >
   <form method="POST" class="flex flex-col" action="">
@@ -18,7 +18,7 @@
     form.responsible.errors %} <span style="color: red">[{{ error }}]</span>
     {% endfor %} 
     
-    {{ form.responsible(class=" bg-neutral-50 bg-opacity-40 shrink
+    {{ form.responsible(class=" bg-neutral-50 bg-opacity-20 shrink
     w-full h-5 mt-1 mb-1 px-3 py-5 border rounded-md focus:outline-none
     focus:ring-1 focus:ring-indigo-400", placeholder="Assigning User") }} 
     
@@ -30,7 +30,7 @@
     <span style="color: red">[{{ error }}]</span>
     {% endfor %}
     
-    {{ form.title(class="bg-opacity-40 bg-neutral-50 shrink w-full
+    {{ form.title(class="bg-opacity-20 bg-neutral-50 shrink w-full
     mb-1 h-5 mt-1 px-3 py-5 border rounded-md focus:outline-none focus:ring-1
     focus:ring-indigo-400", placeholder="Task Title") }} 
     
@@ -42,7 +42,7 @@
     <span style="color: red">[{{ error }}]</span>
     {% endfor %} 
     
-    {{ form.description( class="bg-neutral-50 bg-opacity-40 shrink
+    {{ form.description( class="bg-neutral-50 bg-opacity-20 shrink
     mt-1 px-3 py-1 border rounded-md focus:outline-none focus:ring-1
     focus:ring-indigo-400", placeholder="Task Content...", style="height:
     100px;") }} 
@@ -54,7 +54,7 @@
     <span style="color: red">[{{ error }}]</span>
     {% endfor %}
     
-    {{ form.due( class="bg-neutral-50 bg-opacity-40 shrink w-full
+    {{ form.due( class="bg-neutral-50 bg-opacity-30 shrink w-full
     h-5 mt-1 px-3 py-5 border rounded-md focus:outline-none focus:ring-1
     focus:ring-indigo-400") }}
 

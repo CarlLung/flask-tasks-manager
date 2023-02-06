@@ -6,7 +6,7 @@
 </p>
 
 <div
-  class="px-8 py-6 shrink h-fit sm:h-300 md:h-550 items-center content-center w-full mx-5 my-1 bg-indigo-50 bg-opacity-60 rounded-xl shadow-md overflow-auto max-w-3xl"
+  class="px-8 py-6 shrink h-fit sm:h-300 md:h-550 items-center content-center w-full mx-5 my-1 bg-indigo-50 bg-opacity-20 rounded-xl shadow-md overflow-auto max-w-3xl"
   style="width: 85%"
 >
   <form method="POST" action="">
@@ -20,7 +20,7 @@
     <span style="color: red">[{{ error }}]</span>
     {% endfor %} 
     
-    {{ form.username(class="bg-opacity-40 shrink bg-neutral-50
+    {{ form.username(class="bg-opacity-20 shrink bg-neutral-50
     w-full h-5 mt-1 mb-1 px-3 py-5 border rounded-md focus:outline-none
     focus:ring-1 focus:ring-indigo-400", placeholder="New User") }}
     
@@ -38,7 +38,7 @@
     {% endfor %}
     
     {{ form.password( class="shrink bg-neutral-50 w-full h-5 mt-1
-    mb-1 px-3 py-5 border bg-opacity-40 rounded-md focus:outline-none
+    mb-1 px-3 py-5 border bg-opacity-20 rounded-md focus:outline-none
     focus:ring-1 focus:ring-indigo-400", placeholder="************") }}
     
     {{
@@ -49,7 +49,7 @@
     <span style="color: red">[{{ error }}]</span>
     {% endfor %}
     
-    {{ form.confirm( class="shrink bg-opacity-40 bg-neutral-50
+    {{ form.confirm( class="shrink bg-opacity-20 bg-neutral-50
     w-full h-5 mt-1 px-3 py-5 border rounded-md focus:outline-none focus:ring-1
     focus:ring-indigo-400", placeholder="************") }}
 
