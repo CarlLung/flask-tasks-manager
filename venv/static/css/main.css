@@ -605,6 +605,10 @@ video {
   margin-top: 2.25rem;
 }
 
+.mb-0 {
+  margin-bottom: 0px;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -615,6 +619,10 @@ video {
 
 .mt-12 {
   margin-top: 3rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
 }
 
 .mr-3 {
@@ -729,6 +737,10 @@ video {
 
 .max-w-3xl {
   max-width: 48rem;
+}
+
+.max-w-5xl {
+  max-width: 64rem;
 }
 
 .shrink {
@@ -995,6 +1007,10 @@ video {
   padding-top: 0.75rem;
 }
 
+.pl-7 {
+  padding-left: 1.75rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -1160,8 +1176,18 @@ video {
 }
 
 @media (min-width: 640px) {
+  .sm\:min-w-\[80\%\] {
+    min-width: 80%;
+  }
+
   .sm\:py-12 {
     padding-top: 3rem;
     padding-bottom: 3rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:min-w-\[80\%\] {
+    min-width: 80%;
   }
 }

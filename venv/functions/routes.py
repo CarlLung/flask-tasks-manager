@@ -82,6 +82,8 @@ def welcome():
       return redirect('/my_tasks')
    elif command.lower() == 'e':
       return redirect('/logout')
+   elif current_user == 'admin' and command.lower() == 's':
+      return redirect('/statistics')
 # If user enters the incorrect command, return error
    else:
      msg_err = "Invalid input. Please enter your command according to the options menu."
