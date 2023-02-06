@@ -101,7 +101,8 @@ def not_logged_in():
 def add_task(responsible, title, description, due):
 # Ensuring ', ' does not exists in the description, otherwise when reading the tasks.txt
 # the info could not be extracted properly, as we are using split by ', ' to extract the information
-  description.replace(', ', ',')
+  description = description.replace(', ', ',')
+  print(description)
 # Casting the correct type (string) and format to the form entry of due date
   due = due.strftime('%-d %b %Y')
 # Pass the form entries into the class Task to give an object
@@ -133,7 +134,7 @@ def view_all():
 #----------------by utilising RegEx--------------------
 
 def pw_valid(pw):
-  pw_pattern = re.compile(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#%?&+-^=])[A-Za-z\d@$!%+#-%^=*?&]{8,}$")
+  pw_pattern = re.compile(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#%?&+-_^=])[A-Za-z\d@$!%+#-_%^=*?&]{8,}$")
   return re.match(pw_pattern, pw) is not None
 
 #----------Function for username validation------------

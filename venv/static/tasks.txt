@@ -1,21 +1,17 @@
-1, admin, Register Users with taskManager.py, Use taskManager.py to add the usernames and passwords for all team members that will be using this program., 10 Oct 2019, 20 Oct 2019, No
-2, admin, Assign initial tasks, Use taskManager.py to assign each team member with appropriate tasks, 10 Oct 2019, 25 Oct 2019, No
-3, Test1, Test2, Test3, 19 Jan 2023, 31 Jan 2023, No
-4, test, I am, Ha Ha, 20 May 2023, 1 Feb 2023, No
-5, Test1, Test2, Test3, 19 Jan 2023, 31 Jan 2023, No
-6, aaa, bbb, ccc, 24 Feb 2023, 1 Feb 2023, No
-c3e6734e-a7a4-4fde-9333-05cb156efa29, Hi, Bye, Shit, 16 Dec 2022, 1 Feb 2023, No
-e48fde70-8efa-4c0d-a492-2c30d1bd1118, hi, bye, gg, 17 Nov 2022, 1 Feb 2023, No
-4d415078-5fac-48de-9c66-50d4de7db051, hi, bye, gg, 14 Dec 2022, 1 Feb 2023, No
-4d415078-5fac-48de-9c66-50d4de7db051, fsgjol, skdhkusg, kuagkdz, 2 Feb 2023, 1 Feb 2023, No
-438c8e0d-49b4-4358-afdd-2f8601b928c1, ttt, ddd, eee, 15 Feb 2023, 1 Feb 2023, No
-76a5e241-4aa7-4e21-a150-f5a28d5e2155, asdfdasoj, afoskaps, ladfihalidfh, 10 Nov 2022, 1 Feb 2023, No
-b775dedc-06db-493b-8fb1-f16ff279e65a, AAA, FKGJ, SFKUGHKSF, 16 Dec 2022, 2 Feb 2023, No
-3404a545-9e7b-45ef-8d60-e730aa6a5a9d, ASD, dkfgj, jdsfhk, 8 Feb 2023, 2 Feb 2023, No
-f144e581-9271-4424-a72b-4ee90e247cce, test, jsdfh, jsugak, 25 Feb 2023, 2 Feb 2023, No
-f144e581-9271-4424-a72b-4ee90e247cce, admin, asdliasj, .algjldz, 19 May 2023, 2 Feb 2023, No
-99769867-6f6d-4f1d-8b2c-3ae2355328c8, admin, asfiljfa, lsdifjlsdghksd, 25 Feb 2023, 4 Feb 2023, No
-99769867-6f6d-4f1d-8b2c-3ae2355328c8, admin, asfiljfa,jsdhfks, lsdifjlsdghksdsdlfijsdlif, 25 Feb 2023, 4 Feb 2023, No
-99769867-6f6d-4f1d-8b2c-3ae2355328c8, admin, asfiljfa,jsdhfkskashfkusd, lsdifjlsdghksdsdlfijsdlifkdshfkusedh, 25 Feb 2023, 4 Feb 2023, No
-3371411e-4f13-4e7d-b1df-edf0a65f3d28, test_user, 1, 2, 18 Feb 2023, 6 Feb 2023, No
-fe18a175-0b86-4a9a-8d8e-d59ed2d4f312, test_user, 2, 234, 25 Feb 2023, 6 Feb 2023, No
+c3e6734e-a7a4-4fde-9333-05cb156efa29, admin, Responding to customer inquiries, Responding to customer inquiries: Providing timely and effective solutions to customer inquiries via phone, email or chat., 16 Dec 2022, 1 Feb 2023, No
+e48fde70-8efa-4c0d-a492-2c30d1bd1118, admin, Debugging technical issues, Debugging technical issues: Troubleshooting and resolving technical problems reported by customers or team members., 17 Nov 2022, 1 Feb 2023, No
+4d415078-5fac-48de-9c66-50d4de7db051, admin, Building and testing new features, Building and testing new features: Developing and testing new software features to improve customer experience and meet business objectives., 14 Dec 2022, 1 Feb 2023, No
+4d415078-5fac-48de-9c66-50d4de7db051, test_user, Creating and managing budgets, Creating and managing budgets: Preparation, analysis, and management of budgets for various departments., 2 Feb 2023, 1 Feb 2023, No
+438c8e0d-49b4-4358-afdd-2f8601b928c1, test_user, Conducting employee performance evaluations, Conducting employee performance evaluations: Assessing and providing feedback on employee performance to drive individual and team growth., 15 Feb 2023, 1 Feb 2023, No
+76a5e241-4aa7-4e21-a150-f5a28d5e2155, test_user, Providing technical support to team members, Providing technical support to team members: Assisting team members with technical problems and providing guidance to enhance productivity., 10 Nov 2022, 1 Feb 2023, No
+b775dedc-06db-493b-8fb1-f16ff279e65a, user_1, Monitoring and analyzing data, Monitoring and analyzing data: Collecting, analyzing and reporting on data to inform decision-making and identify trends., 16 Dec 2022, 2 Feb 2023, No
+3404a545-9e7b-45ef-8d60-e730aa6a5a9d, user_1, Maintaining and updating company software, Maintaining and updating company software: Keeping company software updated and functioning optimally through maintenance and upgrades., 8 Feb 2023, 2 Feb 2023, No
+f144e581-9271-4424-a72b-4ee90e247cce, user_1, Managing customer accounts, Managing customer accounts: Monitoring and managing customer accounts, ensuring customer satisfaction and managing customer relationship., 25 Feb 2023, 2 Feb 2023, No
+f144e581-9271-4424-a72b-4ee90e247cce, user_2, Conducting market research, Conducting market research: Collecting and analyzing market data to inform product development and marketing strategies., 19 May 2023, 2 Feb 2023, No
+99769867-6f6d-4f1d-8b2c-3ae2355328c8, user_2, Writing and publishing blog posts, Writing and publishing blog posts: Creating and publishing blog posts that educate and engage customers and promote company products., 25 Feb 2023, 4 Feb 2023, No
+99769867-6f6d-4f1d-8b2c-3ae2355328c8, user_3, Collaborating with cross-functional teams, Collaborating with cross-functional teams: Working with teams across departments to achieve common goals and improve processes., 25 Feb 2023, 4 Feb 2023, No
+99769867-6f6d-4f1d-8b2c-3ae2355328c8, user_3, Managing inventory and supplies, Managing inventory and supplies: Tracking and ordering company supplies and ensuring sufficient levels for operations., lsdifjlsdghksdsdlfijsdlifkdshfkusedh, 25 Feb 2023, 4 Feb 2023, No
+3371411e-4f13-4e7d-b1df-edf0a65f3d28, user_4, Participating in team meetings and training sessions, Participating in team meetings and training sessions: Attending regular team meetings and training sessions to stay updated and continue professional development., 18 Feb 2023, 6 Feb 2023, No
+fe18a175-0b86-4a9a-8d8e-d59ed2d4f312, user_4, Implementing process improvements, Implementing process improvements: Identifying and implementing process improvements to increase efficiency and reduce costs., 25 Feb 2023, 6 Feb 2023, No
+f6f31326-2457-4f84-8104-a0004486237a, new_user_5, Data Entry, Data Entry: Entering and updating accurate and relevant information into company databases and systems., 21 May 2023, 6 Feb 2023, No
+b230cac6-2751-48f5-bf96-00c30f39162c, new_user_6, Social Media Management, Creating,scheduling,and publishing content on company social media platforms to increase engagement and brand visibility., 24 Jun 2023, 6 Feb 2023, No
