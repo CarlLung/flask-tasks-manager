@@ -2,33 +2,33 @@
 
 <!-- Welcome page with an input field for entering command -->
 
-<div class="sm:w-300 md:w-675 shrink" style="overflow: scroll">
-  <div class="grid-rows-2 stretch">
+<div class="sm:w-300 md:w-675" style="overflow: scroll">
+  <div class="grid-rows-2">
     <div class="row-start-1 flex flex-col items-center">
       <p class="text-4xl mt-2 font-bold mb-3 text-indigo-900">
         Welcome to the Tasks Manager dashboard!
       </p>
 
       <div class="flex flex-col">
-        <p class="shrink text-lg text-indigo-700 text-center font-medium mr-2">
+        <p class="text-lg text-indigo-700 text-center font-medium mr-2">
           Please select one of the following options:
         </p>
         <p
-          class="shrink mt-2 text-lg text-indigo-900 text-center font-medium mr-2"
+          class="mt-2 text-lg text-indigo-900 text-center font-medium mr-2"
         >
           Enter 'a' - to add task
         </p>
-        <p class="shrink text-lg text-indigo-900 text-center font-medium mr-2">
+        <p class="text-lg text-indigo-900 text-center font-medium mr-2">
           Enter 'va' - to view all tasks
         </p>
-        <p class="shrink text-lg text-indigo-900 text-center font-medium mr-2">
+        <p class="text-lg text-indigo-900 text-center font-medium mr-2">
           Enter 'vm' - view my tasks
         </p>
-        <p class="shrink text-lg text-indigo-900 text-center font-medium mr-2">
+        <p class="text-lg text-indigo-900 text-center font-medium mr-2">
           Enter 'r' - to register user
         </p>
         <p
-          class="shrink text-lg mb-2 text-indigo-900 text-center font-medium mr-2"
+          class="text-lg mb-2 text-indigo-900 text-center font-medium mr-2"
         >
           Enter 'e' - to exit the system
         </p>
@@ -37,11 +37,11 @@
           class="flex flex-row h-10 justify-center items-center"
           action=""
         >
-          {{ form.hidden_tag() }} {{ form.command.label(class="label shrink
+          {{ form.hidden_tag() }} {{ form.command.label(class="label
           text-lg text-indigo-700 font-medium mr-3")}}
 
           {{ form.command(class=" bg-opacity-20 bg-neutral-50
-          shrink w-60 mt-1 mb-1 px-3 mr-3 border h-8 rounded-md
+           w-60 mt-1 mb-1 px-3 mr-3 border h-8 rounded-md
           focus:outline-none focus:ring-1 focus:ring-indigo-400", placeholder="
           a / va / vm / r / e" ) }} 
           
