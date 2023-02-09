@@ -1,5 +1,5 @@
 import string
-from functions import routes
+from functions import routes, functions
 from flask import Flask
 from datetime import timedelta
 
@@ -20,8 +20,10 @@ app.route('/add_task', methods=['GET', 'POST'])(routes.add_task_render)
 app.route('/my_tasks')(routes.view_mine_render)
 app.route('/register', methods=['GET', 'POST'])(routes.reg_user_render)
 app.route('/statistics')(routes.statistics_render)
+app.route("/generate_reports", methods=["POST"])(functions.generate_reports)
 app.route('/unauthorised')(routes.unauthorised)
 app.route('/logout')(routes.logout)
+
 
 
 app.config['SECRET_KEY'] = '123456'

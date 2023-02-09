@@ -21,6 +21,13 @@ class Task:
        self.due = due
        self.created_date = created_date
        self.completed = completed
+    
+   def mark_as_completed(self):
+       self.completer = 'Yes'
+   
+   def edit_task(self, name, due_date):
+       self.responsible = name
+       self.due = due_date
 
 #----------Function for turning the data in user.txt ------------
 #-----into a dictionary with key: username, value: password -----
@@ -195,4 +202,50 @@ def statistics():
   number_tasks = len(tasks_list)
 # Return the variables to routes.py for rendering by statistics_render function
   return number_users, number_tasks 
+
+#----------Function for determining if the task isoverdue-----------
+def overdue(due_date_str):
+  due_date = datetime.strptime(due_date_str, '%d %B %Y').date()
+  is_due = due_date < datetime.now().date()
+  return is_due
+#----------Function for generating reports------------
+
+def generate_reports():
+    tasks_list = view_all()
+    with open ('static/task_overview.txt', 'w') as f_report_task:
+
+      completed_tasks_list = filter(lambda x: x.completed == 'Yes', tasks_list)
+      incompleted_tasks_list = filter(lambda x: x.completed == 'No', tasks_list)
+      overdue_incompleted_tasks_list = filter(lambda x: overdue(x.due), incompleted_tasks_list)
+    
+      total_tasks_number = len(tasks_list)
+      number_completed = len(completed_tasks_list),
+      number_incompleted = len(incompleted_tasks_list),
+      number_overdue = len(overdue_incompleted_tasks_list)
+      
+      incompleted_percent = round((number_incompleted / total_tasks_number) * 100, 2)
+      overdue_percent = round((number_overdue / total_tasks_number) * 100, 2)
+
+      f_report_task.write(f'{total_tasks_number}, {number_completed}, {number_incompleted}, {number_overdue}, {incompleted_percent}, {overdue_percent}')
+
+    with open ('static/user_overview.txt', 'w') as f_report_user:
+      users_dict = view_mine()
+
+      for user in users_dict:
+        username = user
+        user_tasks_list = filter(lambda x: x.responsible == user, tasks_list)
+
+        number_user_tasks = len(user_tasks_list)
+
+        user_completed_list = filter(lambda x: x.completed == 'Yes', user_tasks_list)
+        user_incompleted_list = filter(lambda x: x.completed == 'No', user_tasks_list)
+        user_overdue_list = filter(lambda x: overdue(x.due), user_tasks_list)
+
+        user_tasks_percent = number_user_tasks / len(tasks_list)
+        user_completed_percent = len(user_completed_list) / len(user_tasks_list)
+        user_incompleted_percent = len(user_incompleted_list) / len(user_tasks_list)
+        user_overdue_percent = len(user_overdue_list) / len(user_tasks_list)
+
+      f_report_user.write(f'{username}, {number_user_tasks}, {user_tasks_percent}, {user_completed_percent}, {user_incompleted_percent}, {user_tasks_list}')
+
 
