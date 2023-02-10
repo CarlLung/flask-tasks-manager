@@ -228,11 +228,12 @@ def generate_reports():
       number_completed = len(completed_tasks_list)
       number_incompleted = len(incompleted_tasks_list)
       number_overdue = len(overdue_incompleted_tasks_list)
-
+      
+      completed_percent = round((number_completed / total_tasks_number) * 100, 2)
       incompleted_percent = round((number_incompleted / total_tasks_number) * 100, 2)
       overdue_percent = round((number_overdue / total_tasks_number) * 100, 2)
       
-      f_report_task.write(f'{total_tasks_number}, {number_completed}, {number_incompleted}, {number_overdue}, {incompleted_percent}, {overdue_percent}')
+      f_report_task.write(f'{total_tasks_number}, {number_completed}, {number_incompleted}, {number_overdue}, {completed_percent}, {incompleted_percent}, {overdue_percent}')
 
     with open ('static/user_overview.txt', 'w') as f_report_user:
       users_dict = view_mine()
@@ -247,10 +248,10 @@ def generate_reports():
         user_incompleted_list = list(filter(lambda x: x.completed == 'No', user_tasks_list))
         user_overdue_list = list(filter(lambda x: overdue(x.due), user_tasks_list))
 
-        user_tasks_percent = number_user_tasks / len(tasks_list)
-        user_completed_percent = len(user_completed_list) / len(user_tasks_list)
-        user_incompleted_percent = len(user_incompleted_list) / len(user_tasks_list)
-        user_overdue_percent = len(user_overdue_list) / len(user_tasks_list)
+        user_tasks_percent = round((number_user_tasks / len(tasks_list)) * 100)
+        user_completed_percent = round((len(user_completed_list) / len(user_tasks_list)) * 100)
+        user_incompleted_percent = round((len(user_incompleted_list) / len(user_tasks_list)) * 100)
+        user_overdue_percent = round((len(user_overdue_list) / len(user_tasks_list)) * 100)
 
         f_report_user.write(f'{username}, {number_user_tasks}, {user_tasks_percent}, {user_completed_percent}, {user_incompleted_percent}, {user_overdue_percent}\n')
 
@@ -266,10 +267,11 @@ def display_report_task():
         number_completed = task_report_split[1]
         number_incompleted = task_report_split[2]
         number_overdue = task_report_split[3]
-        incompleted_percent = task_report_split[4]
-        overdue_percent = task_report_split[5]
+        completed_percent = task_report_split[4]
+        incompleted_percent = task_report_split[5]
+        overdue_percent = task_report_split[6]
     
-    task_data_dict = {'total_tasks_number': total_tasks_number, 'number_completed': number_completed, 'number_incompleted': number_incompleted, 'number_overdue': number_overdue, 'incompleted_percent': incompleted_percent, 'overdue_percent': overdue_percent}
+    task_data_dict = {'total_tasks_number': total_tasks_number, 'number_completed': number_completed, 'number_incompleted': number_incompleted, 'number_overdue': number_overdue, 'completed_percent': completed_percent, 'incompleted_percent': incompleted_percent, 'overdue_percent': overdue_percent}
 
     return task_data_dict
 
@@ -279,7 +281,7 @@ def display_report_user():
    
    user_data_list = []
 
-   with open ('static/user_overview.txt', 'w') as f_read_report_user:
+   with open ('static/user_overview.txt', 'r') as f_read_report_user:
       
     for line in f_read_report_user:
       user_report_split = line.split(', ')

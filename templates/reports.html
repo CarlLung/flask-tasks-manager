@@ -1,0 +1,109 @@
+{% extends "./components/layout.html" %} {% block content %}
+
+<!-- Show all tasks -->
+
+<div class="flex flex-col items-center stretch sm:min-w-[80%] md:min-w-[80%]" style="overflow:scroll">
+    <p class="text-3xl font-bold mb-1 text-indigo-900">Tasks Overview</p>
+
+    <div
+    class="sm:min-w-[80%] md:min-w-[80%] mx-5 my-1  bg-opacity-40 bg-indigo-50 rounded-xl shadow-md max-w-3xl flex flex-col stretch sm:min-w-[80%] md:min-w-[80%] pt-1 pb-3 px-1]"
+  >
+    <div class="px-8 grow flex flex-row self-center items-baseline mb-1">
+         <p class="text-xl font-medium text-indigo-700 mr-1">Total number of tasks:</p>
+         <p class="text-2xl text-indigo-900">{{task_data_dict.total_tasks_number}}</p>
+    </div>
+
+
+<div class="flex flex-row flex-nowrap sm:min-w-[80%] md:min-w-[80%] justify-evenly">
+    <div class="basis-1/3 px-5 grow flex flex-row items-baseline">
+      <p class="text-md font-medium text-indigo-700 mr-1">Number of completed tasks:</p>
+      <p class="text-lg text-indigo-900">{{task_data_dict.number_completed}}</p>
+    </div>
+
+    <div class="basis-1/3 grow flex flex-row items-baseline">
+      <p class="text-md font-medium text-indigo-700 mr-1">Number of incompleted tasks:</p>
+      <p class="text-lg text-indigo-900">{{task_data_dict.number_incompleted}}</p>
+    </div>
+  </div>
+
+  <div class="flex flex-row flex-nowrap sm:min-w-[80%] md:min-w-[80%] justify-evenly">
+    <div class="basis-1/3 px-5 grow flex flex-row items-baseline">
+      <p class="text-md font-medium text-indigo-700 mr-1">Percentage of completed tasks:</p>
+      <p class="text-lg text-indigo-900">{{task_data_dict.completed_percent}} %</p>
+    </div>
+
+    <div class="basis-1/3 grow flex flex-row items-baseline">
+      <p class="text-md font-medium text-indigo-700 mr-1">Percentage of incompleted tasks:</p>
+      <p class="text-lg text-indigo-900">{{task_data_dict.incompleted_percent}} %</p>
+    </div>
+  </div>
+
+  <div class="flex flex-row flex-nowrap sm:min-w-[80%] md:min-w-[80%] justify-evenly">
+    <div class="basis-1/3 px-5 grow flex flex-row items-baseline">
+      <p class="text-md font-medium text-indigo-700 mr-1">Total number of overdue tasks:</p>
+      <p class="text-lg text-indigo-900">{{task_data_dict.number_overdue}}</p>
+    </div>
+
+    <div class="basis-1/3 grow flex flex-row">
+      <p class="text-md font-medium text-indigo-700 mr-1">Percentage of overdue tasks:</p>
+      <p class="text-lg text-indigo-900">{{task_data_dict.overdue_percent}} %</p>
+    </div>
+  </div>
+  </div>
+<p class="text-3xl font-bold mb-3 mt-2 text-indigo-900">User Overview</p>
+
+  <!-- Using for loop on the list of task objects -->
+  {% for user_data in user_data_list %}
+
+  <div
+  class="sm:min-w-[80%] md:min-w-[80%] mx-5 my-1  bg-opacity-40 bg-indigo-50 rounded-xl shadow-md max-w-3xl"
+>
+  <div class="py-3 px-8 sm:min-w-[80%] md:min-w-[80%]">
+    <div class="flex flex-col flex-nowrap sm:min-w-[80%] md:min-w-[80%]">
+      <div class="flex flex-row sm:min-w-[80%] md:min-w-[80%]">
+          <div class="basis-3/5">
+            <div class="flex flex-row">
+              <p class="text-lg basis-1/6 text-indigo-700 font-medium">
+                User:
+              </p>
+              <p class="text-lg basis-5/6 text-indigo-900 font-medium">
+                {{user_data.username}}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-row flex-nowrap">
+          <div class="basis-1/3 grow flex flex-row">
+            <p class="text-sm font-medium text-indigo-700 mr-2">Number of tasks assigned:</p>
+            <p class="text-sm text-indigo-900">{{user_data.number_user_tasks}}</p>
+          </div>
+
+          <div class="basis-1/3 grow flex flex-row">
+            <p class="text-sm font-medium text-indigo-700 mr-2">Overdue percentage:</p>
+            <p class="text-sm text-indigo-900">{{user_data.user_overdue_percent}} %</p>
+          </div>
+        </div>
+
+        <div class="flex flex-row flex-nowrap mb-1">
+          <div class="basis-1/3 grow flex flex-row">
+            <p class="text-sm font-medium text-indigo-700 mr-2">Completion percentage:</p>
+            <p class="text-sm text-indigo-900">{{user_data.user_completed_percent}} %</p>
+          </div>
+
+          <div class="basis-1/3 grow flex flex-row">
+            <p class="text-sm font-medium text-indigo-700 mr-2">Incompletion percentage:</p>
+            <p class="text-sm text-indigo-900">{{user_data.user_incompleted_percent}} %</p>
+          </div>
+        </div>
+
+        <div class="flex flex-row">
+          <p class="text-sm font-medium text-indigo-700 mr-2">Proportion in related to the total number of tasks in the system:</p>
+          <p class="text-sm text-gray-600">{{user_data.user_tasks_percent}} %</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %} {% endblock %}
+</div>

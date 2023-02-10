@@ -1,5 +1,5 @@
 import string
-from functions import routes, functions
+from functions import routes
 from flask import Flask
 from datetime import timedelta
 
@@ -19,7 +19,7 @@ app.route('/all_tasks')(routes.view_all_render)
 app.route('/add_task', methods=['GET', 'POST'])(routes.add_task_render)
 app.route('/my_tasks')(routes.view_mine_render)
 app.route('/register', methods=['GET', 'POST'])(routes.reg_user_render)
-app.route('/statistics')(routes.statistics_render)
+app.route('/statistics', methods=['GET', 'POST'])(routes.statistics_render)
 app.route('/reports')(routes.reports_render)
 app.route('/unauthorised')(routes.unauthorised)
 app.route('/logout')(routes.logout)
