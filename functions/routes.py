@@ -273,16 +273,40 @@ def statistics_render():
 
 # Call on the statistics functions in functions.py to get the numbers required for display statistics
   number_users, number_tasks = statistics()
-
-# If the request is using get method  
-  if request.method == 'GET':
 # Render page
-     return render_template('statistics.html', number_users=number_users, number_tasks=number_tasks, current_user=current_user )
+  return render_template('statistics.html', number_users=number_users, number_tasks=number_tasks, current_user=current_user )
 
-# If the request is using post method (for the case of clicking the generate report button)
-  if request.method == 'POST':
-     generate_reports()
-     display_reports()
+
+
+
+#----------Rendering Reports------------
+
+def reports_render():
+    
+# Call not_logged_in and expired_session in functions,py to check if the user is logged in or not/ or the session expired
+# If not logged in or session expired, return to login page with messages
+  not_login = not_logged_in()
+  if not_login:
+    flash("Content only available for logged in users.")
+    return redirect('/home')
+
+  expired = expired_session()
+  if expired:
+    flash("Login session timed out. Please login again.")
+    return redirect('/home')
+
+# Get current user from session 
+  current_user = session.get('current_user')
+
+# If the current user is not admin, return unauthorised page
+  if current_user != 'admin':
+   return render_template('unauthorised.html', current_user=current_user)
+
+  generate_reports()
+  task_data_dict = display_report_task()
+  user_data_list = display_report_user()
+
+  return render_template('reports.html', task_data_dict=task_data_dict, user_data_list=user_data_list, current_user=current_user )
 
 #----------Rendering Unauthorised page------------
 
