@@ -3,7 +3,7 @@ from modules.forms.command_form import CmdForm
 from modules.forms.add_form import AddForm
 from modules.forms.register_form import RegisterForm
 from functions.functions import *
-from flask import render_template, redirect, session, flash
+from flask import render_template, redirect, session, flash, request
 
 #----------Rendering Dashboard------------
 
@@ -273,8 +273,16 @@ def statistics_render():
 
 # Call on the statistics functions in functions.py to get the numbers required for display statistics
   number_users, number_tasks = statistics()
+
+# If the request is using get method  
+  if request.method == 'GET':
 # Render page
-  return render_template('statistics.html', number_users=number_users, number_tasks=number_tasks, current_user=current_user )
+     return render_template('statistics.html', number_users=number_users, number_tasks=number_tasks, current_user=current_user )
+
+# If the request is using post method (for the case of clicking the generate report button)
+  if request.method == 'POST':
+     generate_reports()
+     display_reports()
 
 #----------Rendering Unauthorised page------------
 
