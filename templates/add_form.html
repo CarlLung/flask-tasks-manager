@@ -11,7 +11,9 @@
   style="width: 85%"
 >
   <form method="POST" class="flex flex-col" action="">
-    {{ form.hidden_tag() }} {{ form.responsible.label(class="label shrink
+    {{ form.hidden_tag() }} 
+    
+    {{ form.responsible.label(class="label shrink
     text-xl text-indigo-700 font-medium mr-2")}}
     
     {% for error in

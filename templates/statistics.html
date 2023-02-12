@@ -23,9 +23,15 @@
       {{number_users}}
     </p>
  
-  <button class="mt-2 text-white mx-auto shrink px-4 py-2 bg-indigo-700 rounded-md hover:bg-indigo-800 active:bg-indigo-900 w-60 uppercase
-  tracking-wide"><a href="{{ url_for('reports_render') }}">Generate Reports</a></button>
+  <button id="get_reports" class="mt-2 text-white mx-auto shrink px-4 py-2 bg-indigo-700 rounded-md hover:bg-indigo-800 active:bg-indigo-900 w-60 uppercase
+  tracking-wide">Generate Reports</button>
   </div>
 </div>
+
+<script>
+  document.getElementById("get_reports").addEventListener("click", function(){
+      window.location.href = "/reports";
+  });
+</script>
 
 {% endblock %}

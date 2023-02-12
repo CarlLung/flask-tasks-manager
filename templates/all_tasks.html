@@ -3,16 +3,16 @@
 <!-- Show all tasks -->
 
 <p class="text-4xl font-bold mb-3 text-indigo-900">All Tasks</p>
-<div class="flex flex-col items-center stretch sm:min-w-[80%] md:min-w-[80%]" style="overflow:scroll">
+<div class="flex flex-col items-center" style="overflow:scroll;">
   <!-- Using for loop on the list of task objects -->
   {% for task in tasks_list %}
 
   <div
-  class="sm:min-w-[80%] md:min-w-[80%] mx-5 my-1  bg-opacity-40 bg-indigo-50 rounded-xl shadow-md max-w-3xl"
+  class="mx-5 my-1 bg-opacity-40 bg-indigo-50 rounded-xl shadow-md max-w-3xl sm:min-w-[300px] md:min-w-[768px]"
 >
-  <div class="py-3 px-8 sm:min-w-[80%] md:min-w-[80%]">
-    <div class="flex flex-col flex-nowrap sm:min-w-[80%] md:min-w-[80%]">
-      <div class="flex flex-row sm:min-w-[80%] md:min-w-[80%]">
+  <div class="py-3 px-8 sm:min-w-[300px] md:min-w-[755px]">
+    <div class="flex flex-col">
+      <div class="flex flex-row">
           <div class="basis-3/5">
             <div class="flex flex-row">
               <p class="text-xl basis-1/6 text-indigo-700 font-medium">
@@ -37,7 +37,11 @@
 
           <div class="basis-1/3 grow flex flex-row">
             <p class="text-sm font-medium text-indigo-700 mr-2">Completed:</p>
-            <p class="text-sm text-indigo-900">{{task.completed}}</p>
+            {% if task.completed == 'No' %}
+            <p class="text-sm text-red-400">{{task.completed}}</p>
+            {% else %}
+            <p class="text-sm text-green-600">{{task.completed}}</p>
+            {% endif %}
           </div>
         </div>
 

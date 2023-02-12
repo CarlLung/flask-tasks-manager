@@ -3,6 +3,7 @@ from functions import routes
 from flask import Flask
 from datetime import timedelta
 
+
 app = Flask(  # Create a flask app
 	__name__,
 	template_folder='templates',  # Name of html file folder
@@ -18,6 +19,8 @@ app.route('/welcome', methods=['GET', 'POST'])(routes.welcome)
 app.route('/all_tasks')(routes.view_all_render)
 app.route('/add_task', methods=['GET', 'POST'])(routes.add_task_render)
 app.route('/my_tasks')(routes.view_mine_render)
+app.route('/my_tasks/edit', methods=['GET', 'POST'])(routes.edit_task_render)
+app.route('/my_tasks/complete', methods=['GET', 'POST'])(routes.complete_task_render)
 app.route('/register', methods=['GET', 'POST'])(routes.reg_user_render)
 app.route('/statistics', methods=['GET', 'POST'])(routes.statistics_render)
 app.route('/reports')(routes.reports_render)

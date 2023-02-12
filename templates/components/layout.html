@@ -35,27 +35,44 @@
       >
         <!-- See if there are success or error messages available in the flask session-->
         <!-- Show the message in red or green if the message is available -->
-        {% with msg_err = session.get('msg_err') %} {% with success =
-        session.get('success') %} {% if msg_err %}
+        {% with msg_err = session.get('msg_err') %} 
+        {% with success = session.get('success') %} 
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if msg_err %}
         <div
           class="bg-red-500 rounded-md h-7 w-full text-white self-start text-center"
         >
           {{ msg_err }}
         </div>
 
-        {% do session.update({'msg_err': None}) %} {% elif success %}
+        {% do session.update({'msg_err': None}) %} 
+        {% elif success %}
         <div
           class="bg-green-400 rounded-md h-7 w-full text-white self-start text-center"
         >
           {{ success }}
         </div>
-
-        {% do session.update({'success': None}) %} {% else %}
-
+        {% do session.update({'success': None}) %} 
+        {% elif messages %}
+          {% for category, message in messages %}
+          {% if category == "success" %}
+          <div class="bg-green-400 rounded-md h-7 w-full text-white self-start text-center">
+            {{ message }}
+          </div>
+          {% do session.pop('_flashes', []) %}
+          {% endif %}
+          {% if category == "error" %}
+          <div class="bg-red-500 rounded-md h-7 w-full text-white self-start text-center">
+            {{ message }}
+          </div>
+          {% do session.pop('_flashes', []) %}
+          {% endif %}
+          {% endfor %}
+        {% else %}
         <div class="h-7"></div>
-        <!-- Insert content -->
-        {% endif %} {% endwith %} {% endwith %} {% block content %} {% endblock
-        %}
+        {% endif %} {% endwith %} {% endwith %} {% endwith %} 
+        
+        {% block content %} {% endblock%}
       </div>
     </div>
   </body>

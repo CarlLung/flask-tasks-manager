@@ -1,0 +1,39 @@
+{% extends "./components/layout.html" %} {% block content %}
+
+<!-- The form for adding task (Using Flask-WTF)-->
+
+<p class="text-4xl mt-2 font-bold mb-3 text-indigo-900">Edit Task</p>
+
+<p>{{message}}</p>
+
+<div
+  class="px-8 py-6 shrink h-fit sm:h-300 md:h-700 items-center content-center w-full mx-5 my-1 bg-indigo-50 bg-opacity-40 rounded-xl shadow-md overflow-auto max-w-3xl"
+  style="width: 85%"
+>
+  <form method="POST" class="flex flex-col" action="">
+    {{ form.hidden_tag() }} 
+    
+    {{ form.new_responsible.label(class="label shrink
+    text-xl text-indigo-700 font-medium mr-2")}}
+    
+    {{ form.new_responsible(class=" bg-neutral-50 bg-opacity-20 shrink
+    w-full h-5 mt-1 mb-1 px-3 py-5 border rounded-md focus:outline-none
+    focus:ring-1 focus:ring-indigo-400", placeholder="Reassign to another user") }} 
+     
+    {{ form.new_due.label(class="label shrink mt-2 text-xl
+    text-indigo-700 font-medium mr-2") }} 
+    
+    
+    {{ form.new_due( class="bg-neutral-50 bg-opacity-30 shrink w-full
+    h-5 mt-1 px-3 py-5 border rounded-md focus:outline-none focus:ring-1
+    focus:ring-indigo-400") }}
+
+    <div class="flex items-center mt-4">
+      {{ form.submit(class="mx-auto px-4 py-2 bg-indigo-700 text-white
+      rounded-md hover:bg-indigo-800 active:bg-indigo-900 w-60 uppercase
+      tracking-wide") }}
+    </div>
+  </form>
+</div>
+
+{% endblock %}

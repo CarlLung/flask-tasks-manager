@@ -1,0 +1,79 @@
+def edit_task_render(id):
+# Call not_logged_in and expired_session in functions,py to check if the user is logged in or not/ or the session expired
+# If not logged in or session expired, return to login page with messages
+    not_login = not_logged_in()
+    if not_login:
+      flash("Content only available for logged in users.")
+      return redirect('/home')
+
+    expired = expired_session()
+    if expired:
+      flash("Login session timed out. Please login again.")
+      return redirect('/home')
+
+# Get current user from session 
+    current_user = session.get('current_user') 
+
+# Utilising Flask WTF form
+    form = EditForm()
+# Call on view_mine function in functions.py to get a dictionary of users    
+    users_dict = view_mine()
+
+# Upon form submission, store values entered in the form
+    if form.validate_on_submit():
+       new_name = form.new_responsible.data
+       new_due = form.new_due.data
+
+# Use python any method to check if the entered user to be assigned a task exists in user.txt
+       user_exists = any(key == new_name for key in users_dict)
+
+# Check if the due date entered is prior to today, return error if this is the case
+       invalid_due = form.new_due.data < datetime.now().date()
+       if invalid_due:
+         msg_err  = 'You cannot enter a date prior to today.'
+         session['msg_err'] = msg_err
+         return render_template('edit_task_form.html', form=form, current_user=current_user)
+# If the python any method returned false, i.e. entered username does not exist in user.txt, return error
+       elif not user_exists:
+         msg_err  = 'Cannot find user in our system.'
+         session['msg_err'] = msg_err
+         return render_template('edit_task_form.html', form=form, current_user=current_user)
+# If passing the validations, use try...except... to call on the add_task function (passing in form entries) in functions.py
+       else:
+         try:
+# Call on edit_task function in functions.py to update the task.txt file
+           edit_task(id, new_name, new_due)
+# Error catching
+         except:
+           msg_err  = 'An error occured.'
+           session['msg_err'] = msg_err
+           return render_template('edit_task_form.html', form=form, current_user=current_user)
+# If no errors, return a success message
+         else: 
+           flash("Edit task Successful.")
+           return redirect('/my_tasks')
+
+    return render_template('edit_task_form.html', form=form, current_user=current_user)
+
+#----------Functions for mark user's task as completed------------
+
+def complete_task_render(id):
+# Call not_logged_in and expired_session in functions,py to check if the user is logged in or not/ or the session expired
+# If not logged in or session expired, return to login page with messages
+    not_login = not_logged_in()
+    if not_login:
+      flash("Content only available for logged in users.")
+      return redirect('/home')
+
+    expired = expired_session()
+    if expired:
+      flash("Login session timed out. Please login again.")
+      return redirect('/home')
+
+    try:
+     complete_task(id)
+     flash(f"Task {id} marked as completed.") 
+     return redirect('/my_tasks')
+    except:
+     flash("An error occurred.") 
+     return redirect('/my_tasks')

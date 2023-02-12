@@ -3,16 +3,16 @@
 <!-- Show all tasks of the the current user-->
 
 <p class="text-4xl font-bold mb-3 text-indigo-900">My Tasks</p>
-  <div class="flex flex-col items-center stretch sm:min-w-[80%] md:min-w-[80%]" style="overflow:scroll">
+  <div class="flex flex-col items-center" style="overflow:scroll">
   <!-- Using for loop on the list of task objects -->
   {% for task in my_tasks_list %}
 
   <div
-    class="sm:min-w-[80%] md:min-w-[80%] mx-5 my-1  bg-opacity-40 bg-indigo-50 rounded-xl shadow-md max-w-3xl"
-  >
-    <div class="py-3 px-8 sm:min-w-[80%] md:min-w-[80%]">
-      <div class="flex flex-col flex-nowrap sm:min-w-[80%] md:min-w-[80%]">
-        <div class="flex flex-row sm:min-w-[80%] md:min-w-[80%]">
+  class="mx-5 my-1 bg-opacity-40 bg-indigo-50 rounded-xl shadow-md max-w-3xl sm:min-w-[300px] md:min-w-[768px]"
+>
+    <div class="py-3 px-8 sm:min-w-[300px] md:min-w-[768px]">
+      <div class="flex flex-col">
+        <div class="flex flex-row">
 
           <div class="basis-3/5">
 
@@ -28,14 +28,22 @@
       </div>
       </div>
         <div class="flex flex-row flex-nowrap">
-          <div class="basis-1/3 grow flex flex-row">
+          <div class="basis-1/3 grow flex flex-row items-baseline">
             <p class="text-sm font-medium text-indigo-700 mr-2">Assigned to:</p>
             <p class="text-sm text-indigo-900">{{task.responsible}}</p>
+            <button id="edit-button-{{ task.id }}" data-task-id="{{ task.id }}"class="ml-3 text-white shrink px-2 bg-indigo-700 rounded hover:bg-indigo-800 active:bg-indigo-900 uppercase
+            tracking-wide" style="font-size: 10px">Edit Task</button>
           </div>
 
-          <div class="basis-1/3 grow flex flex-row">
+          <div class="basis-1/3 grow flex flex-row items-baseline">
             <p class="text-sm font-medium text-indigo-700 mr-2">Completed:</p>
-            <p class="text-sm text-indigo-900">{{task.completed}}</p>
+            {% if task.completed == 'No' %}
+            <p class="text-sm text-red-400">{{task.completed}}</p>
+            <button id="complete-button-{{ task.id }}" data-task-id="{{ task.id }}" class="ml-3 text-white shrink px-2 bg-indigo-700 rounded hover:bg-indigo-800 active:bg-indigo-900 uppercase
+            tracking-wide" style="font-size: 10px">Mark as completed</button>
+            {% else %}
+            <p class="text-sm text-green-600">{{task.completed}}</p>
+            {% endif %}
           </div>
         </div>
 
@@ -57,6 +65,25 @@
         </div>
       </div>
     </div>
-  </div>
-  {% endfor %} {% endblock %}
+  </div>  
+  {% endfor %} 
+  <script>
+    const completeButtons = document.querySelectorAll("[id^='complete-button-']");
+    const editButtons = document.querySelectorAll("[id^='edit-button-']");
+    completeButtons.forEach(function(button) {
+        button.addEventListener("click", function(){
+          const taskId = button.getAttribute("data-task-id")
+          window.location.href = "/my_tasks/complete?id=" + taskId;
+        });
+    });
+
+    editButtons.forEach(function(button) {
+      button.addEventListener("click", function(){
+          const taskId = button.getAttribute("data-task-id");
+          window.location.href = "/my_tasks/edit?id=" + taskId;
+      });
+    });
+  </script>
+
+  {% endblock %}
 
