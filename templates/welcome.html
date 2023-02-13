@@ -1,4 +1,4 @@
-{% extends "./components/layout.html" %} {% block content %}
+{% extends "./layouts/layout.html" %} {% block content %}
 
 <!-- Welcome page with an input field for entering command -->
 
@@ -6,7 +6,7 @@
   Welcome to the Tasks Manager dashboard!
 </p>
 <div
-  class="pl-7 py-1 h-fit items-center content-center w-full mb-4 bg-indigo-50 bg-opacity-40 rounded-xl shadow-md max-w-5xl"
+  class="pl-7 py-1 h-fit items-center content-center w-full mb-4 bg-indigo-50 bg-opacity-60 rounded-xl shadow-md max-w-5xl"
   style="overflow: scroll"
 >
   <div class="grid-rows-2">
@@ -53,11 +53,11 @@
           text-lg text-indigo-700 font-medium mr-3")}}
           
           {% set user = session.get('current_user') %} {% if user == 'admin': %}
-          {{ form.command(class="bg-opacity-20 bg-neutral-50
+          {{ form.command(class="bg-opacity-40 bg-neutral-50
            w-60 mt-1 mb-1 border h-8 rounded-md
           focus:outline-none focus:ring-1 focus:ring-indigo-400", placeholder="  a / va / vm / r / ds / gr / e " ) }} 
           {% else %}
-          {{ form.command(class=" bg-opacity-20 bg-neutral-50
+          {{ form.command(class=" bg-opacity-40 bg-neutral-50
            w-60 mt-1 mb-1 border h-8 rounded-md
           focus:outline-none focus:ring-1 focus:ring-indigo-400", placeholder="  a / va / vm / r / e " ) }} 
           {% endif %}
@@ -135,16 +135,18 @@
             mentioned above.
           </li>
 
+
+
+
+          
         </ul>
         <p class="text-indigo-800 mt-9 ml-7" style="font-size: 12px">
           Credits to Unsplash license images:
         </p>
-        <p class="text-indigo-800 mt-1 ml-7" style="font-size: 12px">
-          1) https://www.freepik.com/free-vector/white-gray-geometric-pattern-background-vector_18240983.htm (Image by rawpixel.com on Freepik)
-        </p>
-        <p class="text-indigo-800 mt-1 ml-7" style="font-size: 12px">
-          2) https://www.freepik.com/free-photo/purple-pink-watercolor-texture-background_4750952.htmImage (by saragnzalez on Freepik)
-        </p>
+        <p class="text-indigo-800 mt-1 ml-7" style="font-size: 12px">1) Jean-Philippe Delberghe</p>
+        <p class="text-indigo-800 mt-1 ml-7" style="font-size: 12px"> <a href="https://unsplash.com/photos/75xPHEQBmvA">- https://unsplash.com/photos/75xPHEQBmvA</a></p>
+        <p class="text-indigo-800 mt-1 ml-7" style="font-size: 12px">2) Pawel Czerwinski</p>
+        <p class="text-indigo-800 mt-1 ml-7" style="font-size: 12px">   - <a href="https://unsplash.com/photos/l8DUam8vtbc">https://unsplash.com/photos/l8DUam8vtbc</a></p>
       </div>
     </div>
   </div>

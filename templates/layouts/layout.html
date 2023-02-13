@@ -10,7 +10,7 @@
     />
     <style>
       #bg_main {
-        background-image: url("{{ url_for('static', filename='img/purple-pink-watercolor-texture-background_1083-169.jpg') }}");
+        background-image: url("{{ url_for('static', filename='img/pawel-czerwinski-l8DUam8vtbc-unsplash.jpg') }}");
         background-size: cover;
       }
     </style>
@@ -26,11 +26,11 @@
       style="height: 90vh; width: 85vw"
     >
       <div class="basis-40" id="sidemenu">
-        {% include "./components/sidemenu.html" %}
+        {% include "./layouts/sidemenu.html" %}
       </div>
 
       <div
-        class="flex flex-col bg-indigo-100 bg-opacity-50 grow items-center rounded-md"
+        class="flex flex-col bg-indigo-100 bg-opacity-80 grow items-center rounded-md"
         id="content"
       >
         <!-- See if there are success or error messages available in the flask session-->

@@ -923,10 +923,6 @@ video {
   background-color: rgb(226 232 240 / var(--tw-bg-opacity));
 }
 
-.bg-opacity-20 {
-  --tw-bg-opacity: 0.2;
-}
-
 .bg-opacity-30 {
   --tw-bg-opacity: 0.3;
 }
@@ -937,6 +933,10 @@ video {
 
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
+}
+
+.bg-opacity-60 {
+  --tw-bg-opacity: 0.6;
 }
 
 .bg-opacity-80 {

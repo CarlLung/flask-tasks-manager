@@ -1,4 +1,4 @@
-{% extends "./components/layout.html" %} {% block content %}
+{% extends "./layouts/layout.html" %} {% block content %}
 
 <!-- Show all tasks of the the current user-->
 
@@ -8,7 +8,7 @@
   {% for task in my_tasks_list %}
 
   <div
-  class="mx-5 my-1 bg-opacity-40 bg-indigo-50 rounded-xl shadow-md max-w-3xl sm:min-w-[300px] md:min-w-[768px]"
+  class="mx-5 my-1 bg-opacity-60 bg-indigo-50 rounded-xl shadow-md max-w-3xl sm:min-w-[300px] md:min-w-[768px]"
 >
     <div class="py-3 px-8 sm:min-w-[300px] md:min-w-[768px]">
       <div class="flex flex-col">

@@ -1,4 +1,4 @@
-{% extends "./components/layout.html" %} {% block content %}
+{% extends "./layouts/layout.html" %} {% block content %}
 
 <!-- Show all tasks -->
 
@@ -6,7 +6,7 @@
     <p class="text-3xl font-bold mb-1 text-indigo-900">Tasks Overview</p>
 
     <div
-    class="sm:min-w-[80%] md:min-w-[80%] mx-5 my-1  bg-opacity-40 bg-indigo-50 rounded-xl shadow-md max-w-3xl flex flex-col stretch sm:min-w-[80%] md:min-w-[80%] pt-1 pb-3 px-1]"
+    class="sm:min-w-[80%] md:min-w-[80%] mx-5 my-1  bg-opacity-60 bg-indigo-50 rounded-xl shadow-md max-w-3xl flex flex-col stretch sm:min-w-[80%] md:min-w-[80%] pt-1 pb-3 px-1]"
   >
     <div class="px-8 grow flex flex-row self-center items-baseline mb-1">
          <p class="text-lg font-medium text-indigo-700 mr-1">Total number of tasks:</p>
@@ -56,7 +56,7 @@
   {% for user_data in user_data_list %}
 
   <div
-  class="sm:min-w-[80%] md:min-w-[80%] mx-5 my-1  bg-opacity-40 bg-indigo-50 rounded-xl shadow-md max-w-3xl"
+  class="sm:min-w-[80%] md:min-w-[80%] mx-5 my-1  bg-opacity-60 bg-indigo-50 rounded-xl shadow-md max-w-3xl"
 >
   <div class="py-3 px-8 sm:min-w-[80%] md:min-w-[80%]">
     <div class="flex flex-col flex-nowrap sm:min-w-[80%] md:min-w-[80%]">
