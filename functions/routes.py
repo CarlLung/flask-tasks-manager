@@ -214,7 +214,7 @@ def edit_task_render():
     current_user = session.get('current_user') 
 # Call on view_mine function in functions.py to get a dictionary of users    
     users_dict = view_mine()
-#
+# Get the id from the dynamic route
     id = request.args.get('id')
 # Utilising Flask WTF form 
     form = EditForm()
@@ -226,7 +226,6 @@ def edit_task_render():
 # Use python any method to check if the entered user to be assigned a task exists in user.txt
        user_exists = any(key == new_name for key in users_dict)
 
-
 # Check if the due date entered is prior to today, return error if this is the case
        invalid_due = form.new_due.data < datetime.now().date()
        if invalid_due:
@@ -236,17 +235,19 @@ def edit_task_render():
        elif not user_exists:
          flash("Cannot find user in our system.", "error")
          return redirect(f'/my_tasks/edit?id={id}')
-# If passing the validations, use try...except... to call on the add_task function (passing in form entries) in functions.py
+# If passing the validations, use try...except... to call on the edit_task function (passing in id of the task) in functions.py
        else:
          try:
 # Call on edit_task function in functions.py to update the task.txt file
           edit_task(id, new_name, new_due)
          except:
+# Return error message if there is error
           flash("An error occurred.", "error")
           return redirect(f'/my_tasks/edit?id={id}')
+# If passed all validation conditions and return a success message
          flash("Edit task successful.", "success")
          return redirect(url_for('view_mine_render'))
-    
+# Render the page
     return render_template('edit_task_form.html', form=form, current_user=current_user)
 
 #----------Functions for mark user's task as completed------------
@@ -264,14 +265,18 @@ def complete_task_render():
       flash("Login session timed out. Please login again.", "error")
       return redirect('/home')
 
+# Get the id from the dynamic route
     id = request.args.get('id')
 
+# If passing the validations, use try...except... 
+# to call on the complete task function (passing in id of the task) in functions.py
     try:
       complete_task(id)
     except:
+# Return error message if there is error
       flash("An error occurred.", "error")
       return redirect(url_for('view_mine_render'))
-
+# Otherwise, return success message
     flash(f"Task #{id} marked as completed.", "success")
     return redirect(url_for('view_mine_render'))
 
@@ -381,17 +386,20 @@ def reports_render():
 # If the current user is not admin, return unauthorised page
   if current_user != 'admin':
    return redirect('/unauthorised')
-  
+# If passing the validations, use try...except... 
+# to call on the generate_reports function (passing in id of the task) in functions.py
+# and using display_report_task() and display_report_user() 
+# to get the dictionary (for task report) and the list (for user report) to be passed to html for display
   try:
     generate_reports()
     task_data_dict = display_report_task()
     user_data_list = display_report_user()
   except:
-    #Exception as e
-    #logging.error(e, exc_info=True)
+# Return error message if there is error
     flash("An error occurred.", "error")
     return redirect('/statistics')
-
+    
+# Render the page
   return render_template('reports.html', task_data_dict=task_data_dict, user_data_list=user_data_list, current_user=current_user )
 
 #----------Rendering Unauthorised page------------
