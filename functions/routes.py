@@ -5,6 +5,7 @@ from modules.forms.edit_task_form import EditForm
 from modules.forms.register_form import RegisterForm
 from functions.functions import *
 from flask import render_template, redirect, session, flash, url_for, request
+import logging
 
 #----------Rendering Dashboard------------
 
@@ -394,7 +395,8 @@ def reports_render():
     generate_reports()
     task_data_dict = display_report_task()
     user_data_list = display_report_user()
-  except:
+  except Exception as e:
+    logging.error(e, exc_info=True)
 # Return error message if there is error
     flash("An error occurred.", "error")
     return redirect('/statistics')

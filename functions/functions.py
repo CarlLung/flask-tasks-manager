@@ -288,11 +288,17 @@ def generate_reports():
       number_completed = len(completed_tasks_list)
       number_incompleted = len(incompleted_tasks_list)
       number_overdue = len(overdue_incompleted_tasks_list)
-      
+
+# If there are no tasks, show data = 0, else calculate correct data
+      if total_tasks_number != 0:
 # Calculation for getting the required percentage data
-      completed_percent = round((number_completed / total_tasks_number) * 100)
-      incompleted_percent = round((number_incompleted / total_tasks_number) * 100)
-      overdue_percent = round((number_overdue / total_tasks_number) * 100)
+        completed_percent = round((number_completed / total_tasks_number) * 100)
+        incompleted_percent = round((number_incompleted / total_tasks_number) * 100)
+        overdue_percent = round((number_overdue / total_tasks_number) * 100)
+      else:
+        completed_percent = 0
+        incompleted_percent = 0
+        overdue_percent = 0
 
 # Write the numbers into the task_overview.txt  
       f_report_task.write(f'{total_tasks_number}, {number_completed}, {number_incompleted}, {number_overdue}, {completed_percent}, {incompleted_percent}, {overdue_percent}')
@@ -315,12 +321,18 @@ def generate_reports():
         user_incompleted_list = list(filter(lambda x: x.completed == 'No', user_tasks_list))
         user_overdue_list = list(filter(lambda x: overdue(x.due), user_incompleted_list))
 
+# If there are no tasks to show, show data = 0, else calculate correct data
+        if len(user_tasks_list) != 0 and len(tasks_list):
 # Calculation for getting the required percentage data
-        user_tasks_percent = round((number_user_tasks / len(tasks_list)) * 100)
-        user_completed_percent = round((len(user_completed_list) / len(user_tasks_list)) * 100)
-        user_incompleted_percent = round((len(user_incompleted_list) / len(user_tasks_list)) * 100)
-        user_overdue_percent = round((len(user_overdue_list) / len(user_tasks_list)) * 100)
-
+          user_tasks_percent = round((number_user_tasks / len(tasks_list)) * 100)
+          user_completed_percent = round((len(user_completed_list) / len(user_tasks_list)) * 100)
+          user_incompleted_percent = round((len(user_incompleted_list) / len(user_tasks_list)) * 100)
+          user_overdue_percent = round((len(user_overdue_list) / len(user_tasks_list)) * 100)
+        else:
+          user_tasks_percent = 0
+          user_completed_percent = 0
+          user_incompleted_percent = 0
+          user_overdue_percent = 0
 # Write the data into the user_overview.txt  
         f_report_user.write(f'{username}, {number_user_tasks}, {user_tasks_percent}, {user_completed_percent}, {user_incompleted_percent}, {user_overdue_percent}\n')
 
