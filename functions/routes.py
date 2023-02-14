@@ -395,8 +395,7 @@ def reports_render():
     generate_reports()
     task_data_dict = display_report_task()
     user_data_list = display_report_user()
-  except Exception as e:
-    logging.error(e, exc_info=True)
+  except:
 # Return error message if there is error
     flash("An error occurred.", "error")
     return redirect('/statistics')
